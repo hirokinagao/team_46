@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>月別一覧画面</title>
+    
 </head>
 
 <body>
@@ -16,6 +18,7 @@
         <input type="date" id="date" name="今日の日付" value="" />
         <button>PDF</button>
     </div>
+    <section monthly_area>
     <ul>
     <li>日付</li>
     <li>出勤</li>
@@ -24,6 +27,7 @@
     <li>コメント</li>
     <li>編集</li>
     </ul>
+    </section>
 </body>
 
 </html>
