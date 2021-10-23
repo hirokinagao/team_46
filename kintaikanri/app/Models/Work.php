@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
-    use HasFactory;
-
     // 勤怠管理
+
+    use HasFactory;
 }
