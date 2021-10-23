@@ -1,0 +1,16 @@
+.header-inner {
+    height:20px;
+}
+
+.header-inner h2 , .header-inner h3 {
+    font-size: 18px;
+}
+
+.header-inner h2 {
+    float: left;
+}
+
+.header-inner h3 {
+    float: right;
+    padding-right: 15px;
+}

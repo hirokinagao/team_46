@@ -1,0 +1,26 @@
+/*
+全体
+****/
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.side {
+    width: 90px;
+}
+
+.main {
+    width: calc(100% - 90px);
+    max-width: 600px;
+    border-left: 1px solid #eef;
+    border-right: 1px solid #eef;
+    text-align: left;
+}
+
+
+
+
+h1{
+    text-align: center;
+}
