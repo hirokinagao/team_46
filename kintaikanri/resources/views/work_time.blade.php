@@ -1,3 +1,5 @@
+<!-- 宮内専用 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
