@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('monthly_list');
+    return view('welcome');
 });
 
 Route::get('/test', 'App\Http\Controllers\AdminController@test');
