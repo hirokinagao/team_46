@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //テスト用メソッド
-    public function test()
+    public function admin()
     {
         return view ('admin');
     }
