@@ -1,0 +1,122 @@
+/* 柳田専用 */
+
+
+/*
+全体
+****/
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.side {
+    width: 90px;
+    background-color: #66FFFF;
+}
+
+.main {
+    width: calc(100% - 90px);
+    max-width: 1500px;
+    border-left: 1px solid #eef;
+    border-right: 1px solid #eef;
+    text-align: left;
+}
+
+a {
+    font-size: 13px;
+    color: #1af;
+    text-decoration: none;
+}
+
+.text-sm{
+    font-size: 0.7rem;
+}
+
+
+/*
+サイド
+****/
+.side .side-inner {
+    /* top: 0px; */
+    padding: 10px 0;
+    position: sticky;
+    height: 100vh;
+    text-align: center;
+}
+
+.side .side-inner .icon {
+    padding: 30px 0;
+    color: black;
+    font-weight: bold;
+}
+
+
+.side .side-inner .icon:hover {
+    color: black;
+    background-color: rgba(0, 0, 255, 0.2);
+}
+
+.side .side-inner .tukibetu {
+    margin-top: 30px;
+}
+
+.side .side-inner img {
+    width: 110%;
+    position: absolute;
+    left: -4px;
+    top: 10px;
+}
+
+.side .side-inner .space {
+    margin-bottom: 80px;
+}
+
+.side .side-inner .logout {
+    position: absolute;
+    left: 3.25px;
+    bottom: 50px;
+    font-size: 15px;
+    /* z-index: 1; */
+    background-color: #3399FF;
+    border-color: #3399FF;
+    color: black;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.side .side-inner .logout:hover {
+    color: white;
+    background-color: #00CCFF;
+    border-color: #00CCFF;
+}
+
+
+
+
+/*
+メイン
+****/
+.main .main-header {
+    padding: 20px;
+    border-bottom: 1px solid #eef;
+    background-color: #CCFFFF;
+}
+
+
+
+/*
+ホーム
+****/
+.home .tweet-post {
+    display: flex;
+    padding: 10px;
+}

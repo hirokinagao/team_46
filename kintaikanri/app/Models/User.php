@@ -1,5 +1,9 @@
 <?php
 
+/*
+| 全員共通ファイル
+*/
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;

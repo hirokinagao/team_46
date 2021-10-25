@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 /*
+| 全員共通ファイル
+*/
+
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -13,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('monthly_list');
+    return view('welcome');
 });
+
+Route::get('/admin', 'App\Http\Controllers\AdminController@admin');
