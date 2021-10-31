@@ -28,13 +28,13 @@
             </div>
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
-            <div class="work">
+        <div class="work">
 
             <input type="text" id="comment" name="comment" size="80" style="width:535;border:1px solid #00ccff">
-<form action="index.php" method="post">
+            <form action="index.php" method="post">
             <button type="submit" name="add">登録</button>
-</form>
-            </div>
+            </form>
+        </div>
 
 
 
