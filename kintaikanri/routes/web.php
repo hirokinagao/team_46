@@ -22,4 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', 'App\Http\Controllers\AdminController@admin');
+
+
+Route::get('/edit', 'App\Http\Controllers\EditController@edit')->name('edit');
+Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->name('work_time');
