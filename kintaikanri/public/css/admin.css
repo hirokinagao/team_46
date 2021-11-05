@@ -1,5 +1,80 @@
+
 /* 柳田専用 */
 
-h1{
+.users_list {
+    padding-top: 50px;
+    width: 100%;
+}
+
+.users_list h1 {
     text-align: center;
 }
+
+.users_list button {
+    float: right;
+    height: 40px;
+    margin-right: 40px;
+}
+
+.users_list input {
+    float: right;
+    height: 40px;
+    width: 200px;
+    padding: 2px 0 0 7px;
+    font-family:'Lucida Console';
+    font-size: 13px;
+}
+
+.users_list .btn:hover {
+    background-color: #AAAAAA;
+    border-color: #AAAAAA;
+}
+
+.users_list .btn:focus {
+    box-shadow: none;
+}
+
+.list {
+    position: relative;
+    top: 50px;
+    margin-left: 200px;
+    margin-right: 100px;
+    text-align: center;
+}
+
+.list_title , .list_result {
+    width:1000px;
+    display: block;
+    /* スクロール設定する時はblockを設定しサイズを固定が必須 */
+}
+
+.list_title {
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.list_result {
+    overflow-y:scroll;
+    height: 423px;
+    width: 1000px;
+}
+
+.list th , .list td {
+    table-layout:fixed;
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+
+.list .work_id , .list .name {
+    border-bottom: 0.3px solid #CCCCCC;
+}
+
+.list .work_id {
+    width: 450px;
+    padding-top: 10px;
+}
+
+.list .name {
+    width: 550px;
+    padding-top: 10px;
+}
+

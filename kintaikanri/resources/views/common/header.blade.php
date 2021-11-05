@@ -1,7 +1,9 @@
+
 <!-- 柳田専用 -->
 
-<div class="header-inner"> 
-    <h2>～画面</h2>
-    <h3>テスト 太郎</h3>
-    <h3>a000000001</h3>
+<div class="header"> 
+    <h2> {{ $view_name }} </h2>
+    <h3> {{ $user_name }}</h3>
+    <h3> {{ $work_id }}</h3>
 </div>
+

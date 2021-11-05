@@ -18,14 +18,12 @@
     
 </head>
 
-<body class="home">
-    <div class="container">
-        @include('common.side')
+<body>
+    <div class="main_wrapper">
+        @include('common.side', [ 'role' => $user_role ])
 
         <div class="main">
-            <div class="main-header">
-                @include('common.header')
-            </div>
+                @include('common.header', ['view_name' => '月別一覧画面' , 'user_name' => $user_name, 'work_id' => $work_id])
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="">

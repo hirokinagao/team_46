@@ -18,8 +18,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/admin', 'App\Http\Controllers\AdminController@admin');
+/*******************
+ * ログイン画面表示
+ *******************/
+Route::get('/', 'App\Http\Controllers\LoginController@login')->name('login');
+
+/*******************
+ * ログイン機能
+ *******************/
+Route::post('/login_session', 'App\Http\Controllers\LoginController@session')->name('session');
+
+/*******************
+ * 管理者画面表示
+ *******************/
+Route::any('/admin', 'App\Http\Controllers\AdminController@admin')->name('admin');
+
+/*******************
+ * 検索結果表示機能
+ *******************/
+Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('search');
+
+
+

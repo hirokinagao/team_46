@@ -1,19 +1,26 @@
+
 /* 柳田専用 */
 
-
-.header-inner {
-    height:20px;
+/*
+ヘッダー
+********/
+.header {
+    width: 100%;
+    background-color: #CCFFFF;
+    height: 50px;
+    padding: 13px 20px;
 }
 
-.header-inner h2 , .header-inner h3 {
+.header h2 , .header h3 {
     font-size: 18px;
 }
 
-.header-inner h2 {
+.header h2 {
     float: left;
 }
 
-.header-inner h3 {
+.header h3 {
     float: right;
-    padding-right: 15px;
+    padding-right: 20px;
 }
+
