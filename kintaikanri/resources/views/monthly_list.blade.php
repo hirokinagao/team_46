@@ -39,7 +39,7 @@
             <div class="table">
             <table>
                 <tr class="mene">
-                    <th>日付</th>
+                    <th class="mene_item">日付</th>
                     <th>出勤</th>
                     <th>退勤</th>
                     <th>休憩</th>
