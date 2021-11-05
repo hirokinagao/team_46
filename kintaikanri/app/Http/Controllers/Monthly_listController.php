@@ -32,9 +32,6 @@ class Monthly_listController extends Controller
 
         //DBと照合してデータ検索
         $users = DB::table('work_times')->get();
-            //①テーブルの4項目（開始時間など）を一つのカラムにまとめる（タイプはDateTime）
-            //②データを用意する 例：2021-11-01 10：11：12
-            //③上記が終わったらContorollerを修正する
         $view = view('monthly_list', [
             'users' => $users,      //上記でDBから取得したデータ
             'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
