@@ -32,6 +32,7 @@ class Monthly_listController extends Controller
 
         //DBと照合してデータ検索
         $users = DB::table('work_times')->get();
+        
         $view = view('monthly_list', [
             'users' => $users,      //上記でDBから取得したデータ
             'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
