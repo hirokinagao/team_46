@@ -67,15 +67,15 @@ class LoginController extends Controller
         $request->session()->put('role',  $userdata->role);
 
         //monthly_list.bladeを呼び出す( (仮)コード：本来は長尾さんがコントローラーのメソッドに書く内容を(仮)で作成してる)
-        $view = view('monthly_list', [
-            'user_data' => $userdata,
-            'user_name' => $userdata->name,
-            'user_role' => $userdata->role,
-            'work_id' => $userdata->work_id,
-        ]);
-        return $view;
+        // $view = view('monthly_list', [
+        //     'user_data' => $userdata,
+        //     'user_name' => $userdata->name,
+        //     'user_role' => $userdata->role,
+        //     'work_id' => $userdata->work_id,
+        // ]);
+        // return $view;
 
-        //return redirect('monthly_list');  //(仮)コードが必要なくなったら、こちらのコードと差し替える
+        return redirect('monthly_list');  //(仮)コードが必要なくなったら、こちらのコードと差し替える
                                             //redirect：https://qiita.com/sola-msr/items/4f92686d474118d1cceb
     }
 }

@@ -11,17 +11,42 @@ use Illuminate\Support\Facades\DB;
 
 class Monthly_listController extends Controller
 {
-
-
-    public function monthly_list()
+    /**
+     * 月別一覧画面表示
+     * 
+     * @param Request $request ⇒ここの$requestはsessionのデータ
+     * @return Response
+     */
+    public function monthly_list(Request $request)
     {
-        $users = DB::table('work_times')->get();
-        //①テーブルの4項目（開始時間など）を一つのカラムにまとめる（タイプはDateTime）
-        //②データを用意する　例：2021-11-01　10：11：12
-        //③上記が終わったらContorollerを修正する
+        //$requestの情報を代入
+        $id = $request->session()->get('id');
+        $name = $request->session()->get('name');
+        $role = $request->session()->get('role');
+        $work_id = $request->session()->get('work_id');
 
-        return view('monthly_list', ['users' => $users]);
+        //☆idがなかった場合(ログインしたかのチェック) ⇒　アドレス直打ちでのブラウザ表示を拒否するため
+        if(empty($id)){
+            return redirect('login');
+        }
+
+        //DBと照合してデータ検索
+        $users = DB::table('work_times')->get();
+            //①テーブルの4項目（開始時間など）を一つのカラムにまとめる（タイプはDateTime）
+            //②データを用意する 例：2021-11-01 10：11：12
+            //③上記が終わったらContorollerを修正する
+        $view = view('monthly_list', [
+            'users' => $users,      //上記でDBから取得したデータ
+            'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
+            'user_role' => $role,
+            'work_id' => $work_id,
+        ]);
+        return $view;
     }
+
+
+
+
 
 }
 
