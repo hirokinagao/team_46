@@ -44,3 +44,9 @@ Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('sea
 
 
 
+
+/*******************
+ * 月別一覧画面表示
+ *******************/
+Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly_list')->name('monthly_list');
+

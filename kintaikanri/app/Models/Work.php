@@ -11,7 +11,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
-    // 勤怠管理
-
     use HasFactory;
 }
