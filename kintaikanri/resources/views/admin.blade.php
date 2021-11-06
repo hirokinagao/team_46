@@ -48,7 +48,7 @@
                             <tr>
                                 <!-- <th scope="row" class="no">{{ $user->id }}</th> -->
                                 <td class="work_id">{{ $user->work_id }}</td>
-                                <td class="name"><a href="{{ url('（仮）monthly_list/'.$user->work_id) }}">{{ $user->name }}</a></td>
+                                <td class="name"><a href="{{ url('monthly_list/'. $user->work_id) }}">{{ $user->name }}</a></td>
                             </tr>
                         @endforeach
                     </tbody>
