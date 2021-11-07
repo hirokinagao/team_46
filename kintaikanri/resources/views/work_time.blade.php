@@ -29,7 +29,7 @@
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
         <div class="work_time">
-<body>
+
 <span id="viewTime"></span>
 
 <script type="text/javascript">
@@ -52,11 +52,26 @@ function getNow() {
 	//曜日の配列（日～土）
 	var youbi = new Array("日","月","火","水","木","金","土");
 	//出力用 
-	var s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")" + hour + "時" + min + "分" + sec + "秒" ;
+	var s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")<br>" + hour + "時" + min + "分" + sec + "秒" ;
 	return s;
 }
+
 </script>
-</body><br>
+<br>
+<div class="syukkin">
+    <span>出勤</span>
+</div>
+<div class="taikin">
+    <span>退勤</span>
+</div>
+<br>
+<div class="kyuukeiiri">
+    <span>休憩入り</span>
+</div>
+<div class="kyuukeimodori">
+    <span>休憩戻り</span>
+</div>
+
             <input type="text" id="comment" name="comment" size="80" style="width:535;border:1px solid #00ccff">
             <form action="index.php" method="post">
             <button type="submit" name="add">登録</button>

@@ -1,1 +1,37 @@
 /* 宮内専用 */
+.syukkin{
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    line-height:55px;
+    text-align:center;
+    background:blue;
+    float:left;
+}
+.taikin{
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    line-height:55px;
+    text-align:center;
+    background:pink;
+    float:left;
+}
+.kyuukeiiri{
+    height:60px;
+    width: 60px;
+    border-radius:50%;
+    line-height:55px;
+    text-align:center;
+    background:yellow;
+    float:left;
+}
+.kyuukeimodori{
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    line-height:55px;
+    text-align:center;
+    background:greenyellow;
+    float:left;
+}

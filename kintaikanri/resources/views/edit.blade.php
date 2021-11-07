@@ -29,10 +29,10 @@
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="edit">
-            <p>社員ID&emsp;&emsp;&emsp;&emsp;氏名</p><br>
-
-                勤務状況&emsp;&emsp;&emsp;時刻<br>
-                <select name="kinmu">
+            <p>社員ID&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;氏名</p>
+            <input type="text" name="ID" value="<?php if(!empty ($_POST['work_id']) ){echo $_POST['work_id'];}  ?>"disabble>&emsp;&emsp;&emsp;<input type="text" name="name" value="<?php if(!empty ($_POST['name']) ){echo $_POST['name'];}  ?>"disabble><br>
+            勤務状況&emsp;&emsp;&emsp;時刻<br>
+            <select name="kinmu">
                 <option value="出勤">出勤</option>
                 <option value="退勤">退勤</option>
                 <option value="休憩入">休憩入</option>
