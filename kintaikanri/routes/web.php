@@ -50,3 +50,7 @@ Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('sea
  *******************/
 Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly_list')->name('monthly_list');
 
+
+
+Route::get('/edit', 'App\Http\Controllers\EditController@edit')->name('edit');
+Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->name('work_time');
