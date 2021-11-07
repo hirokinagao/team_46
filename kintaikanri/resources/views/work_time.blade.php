@@ -49,7 +49,7 @@
                     var s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")<br>" + hour + "時" + min + "分" + sec + "秒" ;
                     return s;
                 }
-                window.onload = clock;
+                window.onload = clock;  // ⇒ これにより、ブラウザに表示するのと同時に時刻も表示する事ができる
             </script>
 
             <br>
