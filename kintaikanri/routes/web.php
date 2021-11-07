@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+//【 柳田 】
+//   ↓↓
 /*******************
  * ログイン画面表示
  *******************/
@@ -45,6 +48,9 @@ Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('sea
 
 
 
+
+//【 長尾 】
+//   ↓↓
 /*******************
  * 月別一覧画面表示
  *******************/
@@ -52,5 +58,26 @@ Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly
 
 
 
+
+
+//【 宮内 】
+//   ↓↓
+/*******************
+ * 編集画面表示
+ *******************/
 Route::get('/edit', 'App\Http\Controllers\EditController@edit')->name('edit');
+
+/*******************
+ * 編集機能
+ *******************/
+//Route::
+
+/*******************
+ * 勤退登録画面表示
+ *******************/
 Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->name('work_time');
+
+/*******************
+ * 勤退登録機能
+ *******************/
+//Route::

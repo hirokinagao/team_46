@@ -54,18 +54,7 @@
                     <th>{{"テスト"}}</th>
                 </tr>
                 
-                    <!-- @if(count($users) !== 0)
-                                @foreach($users as $user)
-                                <tr>
-                                    <th>{{1}}</th>
-                                    <th>{{$user->start_time_h."時".$user->start_time_m."分"}}</th>
-                                    <th>{{$user->end_time_h."時".$user->end_time_m."分"}}</th>
-                                    <th>{{$user->rest_on_h."時".$user->rest_on_m."分"}}</th>
-                                    <th>{{$user->comment}}</th>
-                                    <th>編集</th>
-                                </tr>
-                                @endforeach
-                                @endif -->
+
             </table>
             </div>
         </div>
