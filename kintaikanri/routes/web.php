@@ -42,8 +42,11 @@ Route::any('/admin', 'App\Http\Controllers\AdminController@admin')->name('admin'
  *******************/
 Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('search');
 
+/*******************
+ * 月別一覧画面機能
+ *******************/
 
-
+Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit')->name('post_edit');
 
 /*******************
  * 月別一覧画面表示

@@ -13,12 +13,13 @@ html , body {
 
 
 .mene{
-    color: blue;
+    color: #409fd9;
     line-height: 55px;
 }
- .mene th{font-size: 12px;}
+ .mene th{font-size: 15px;}
  .mene_top{
- font-size: 10px;
+ font-size: 14px;
+ line-height: 22px;
  }
 .chart{
 
