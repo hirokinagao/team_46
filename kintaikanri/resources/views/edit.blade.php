@@ -32,12 +32,12 @@
                     <div class="upclass">
                         <div class="shainn">
                             <p class="title_name">社員ID</p>
-                            <input type="text" name="work_id" value="{{ 'work_id' }}"disabble>
+                            <input type="text" name="work_id" value="{{ '長尾さんができてからwork_id' }}"disabble>
                         </div>
 
                         <div class="simei">
                             <p class="title_name">氏名</p>
-                            <input type="text" name="name" value="{{ 'name' }}"disabble>
+                            <input type="text" name="name" value="{{ '長尾さんができてからname' }}"disabble>
                         </div>
                     </div>
                     
