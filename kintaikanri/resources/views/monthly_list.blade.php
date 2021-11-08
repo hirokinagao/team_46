@@ -37,7 +37,7 @@
                 <h1>月別一覧</h1>
             </div>
             <div class="table">
-            <table>
+            <table border="1">
                 <tr class="mene">
                     <th class="mene_item">日付</th>
                     <th>出勤</th>
@@ -46,6 +46,17 @@
                     <th>コメント</th>
                     <th>編集</th>
                 </tr>
+                <form action="edit"method="post"></form>
+                <tr class="mene_top">
+                    <th>{{"10/1(金)"}}</th>
+                    <th>{{"08:00"}}</th>
+                    <th>{{"15:00"}}</th>
+                    <th>{{"1:00"}}</th>
+                    <th>{{"テスト"}}</th>
+                    <th><button type="submit">編集</button></th>
+                </tr>
+                </form>
+                <!-- テストデータができるまでその後消す -->
                 <tr class="mene_top">
                     <th>{{"10/1(金)"}}</th>
                     <th>{{"08:00"}}</th>
