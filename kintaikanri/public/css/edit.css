@@ -43,11 +43,18 @@
     margin-right: 50px;
 }
 
-/* .select_kinnmu option {
-    width: 300px;
+.select_kinnmu select , .jikoku select {
     height: 50px;
     font-size: 20px;
-} */
+}
+
+.select_kinnmu select {
+    width: 100px;
+}
+
+.jikoku select {
+    width: 70px;
+}
 
 .hour_minites {
     display: flex;
