@@ -45,11 +45,7 @@ Route::any('/admin', 'App\Http\Controllers\AdminController@admin')->name('admin'
  *******************/
 Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('search');
 
-/*******************
- * 月別一覧画面機能
- *******************/
 
-Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit')->name('post_edit');
 
 
 //【 長尾 】
@@ -59,10 +55,15 @@ Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit
  *******************/
 Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly_list')->name('monthly_list');
 
+/*******************
+ * 月別一覧画面機能
+ *******************/
+Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit')->name('post_edit');
+
 /*******************************************
  * 月別一覧画面表示(管理者ページからの遷移用)
  *******************************************/
-//Route::get('/monthly_list/{id}', 'App\Http\Controllers\Monthly_listController@monthly_id')->name('monthly_id');
+Route::get('/monthly_list/{id}', 'App\Http\Controllers\Monthly_listController@monthly_id')->name('monthly_id');
 
 
 
