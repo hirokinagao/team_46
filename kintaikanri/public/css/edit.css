@@ -1,2 +1,84 @@
 /* 宮内専用 */
 
+.edit {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.upclass , .downclass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.shainn , .simei , .kinnmu , .jikoku {
+    display: flex;
+    flex-direction: column;
+}
+
+.title_name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.sub_label {
+    font-size: 20px;
+}
+
+.shainn {
+    margin-right: 20px;
+}
+
+.shainn input , .simei input {
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.select_kinnmu {
+    margin-right: 50px;
+}
+
+/* .select_kinnmu option {
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+} */
+
+.hour_minites {
+    display: flex;
+}
+
+.comment_box {
+    width:700px;
+    height: 50px;
+    border:1px solid rgb(126, 124, 124);
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.comment_box:focus {
+    outline: none;
+}
+
+.save_button {
+    background-color: #04dff3;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    padding: 10px 100px;
+    margin-top: 25px;
+}
+
+.save_button:hover {
+    background-color: rgba(0, 238, 255, 0.76);
+}
+
+.save_button:focus {
+    outline: none;
+}

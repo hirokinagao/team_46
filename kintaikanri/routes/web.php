@@ -56,7 +56,10 @@ Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('sea
  *******************/
 Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly_list')->name('monthly_list');
 
-
+/*******************************************
+ * 月別一覧画面表示(管理者ページからの遷移用)
+ *******************************************/
+//Route::get('/monthly_list/{id}', 'App\Http\Controllers\Monthly_listController@monthly_id')->name('monthly_id');
 
 
 
@@ -70,7 +73,7 @@ Route::get('/edit', 'App\Http\Controllers\EditController@edit')->name('edit');
 /*******************
  * 編集機能
  *******************/
-//Route::
+//Route::post('', 'App\Http\Controllers\EditController@')->name('');
 
 /*******************
  * 勤退登録画面表示
@@ -80,4 +83,4 @@ Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->
 /*******************
  * 勤退登録機能
  *******************/
-//Route::
+//Route::post('', 'App\Http\Controllers\Work_timeController@')->name('');

@@ -27,40 +27,55 @@
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="edit">
+                <form action="{{ url('#編集機能のRoute_nameを後で設定') }}" method="post">
+                @csrf
+                    <div class="upclass">
+                        <div class="shainn">
+                            <p class="title_name">社員ID</p>
+                            <input type="text" name="work_id" value="{{ 'work_id' }}"disabble>
+                        </div>
 
-                <p>社員ID&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;氏名</p>
-                <input type="text" name="ID" value="<?php if(!empty ($_POST['work_id']) ){echo $_POST['work_id'];}  ?>"disabble>&emsp;&emsp;&emsp;<input type="text" name="name" value="<?php if(!empty ($_POST['name']) ){echo $_POST['name'];}  ?>"disabble><br>
-                
-                <p>勤務状況&emsp;&emsp;&emsp;時刻</p>
-                <select name="kinmu">
-                    <option value="出勤">出勤</option>
-                    <option value="退勤">退勤</option>
-                    <option value="休憩入">休憩入</option>
-                    <option value="休憩戻">休憩戻</option>
-                </select>
-                &emsp;&emsp;
+                        <div class="simei">
+                            <p class="title_name">氏名</p>
+                            <input type="text" name="name" value="{{ 'name' }}"disabble>
+                        </div>
+                    </div>
+                    
+                    <div class="downclass">
+                        <div class="select_kinnmu">
+                            <p class="title_name">勤務状況</p>
+                            <select name="kinmu">
+                                <option value="出勤">出勤</option>
+                                <option value="退勤">退勤</option>
+                                <option value="休憩入">休憩入</option>
+                                <option value="休憩戻">休憩戻</option>
+                            </select>
+                        </div>
 
-                <select name="hour">
-                    <?php
-                        for($i = 0; $i <=23; $i++)
-                        print('<option value="' . $i . '">' . $i . '</option>');
-                    ?>   
-                </select>
-                <p>時</p>
+                        <div class="jikoku">
+                            <p class="title_name">時刻</p>
+                            <div class="hour_minites">
+                                <select name="hour">
+                                    @for($i = 0; $i <=23; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>;
+                                    @endfor 
+                                </select>
+                                <p class="sub_label">時</p>
 
-                <select name="minites" >
-                    <?php
-                        for($i = 0; $i <=59; $i++)
-                        print('<option value="' . $i . '">' . $i . '</option>');
-                    ?> 
-                </select>
-                <p>分</p><br>
+                                <select name="minites" >
+                                    @for($i = 0; $i <=59; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>;
+                                    @endfor
+                                </select>
+                                <p class="sub_label">分</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <p>コメント</p><br>
-                <textarea id="coment" name="coment" cols="30" rows="3" maxlength="30"></textarea>
-                <form action="index.php" method="post"><br>
-                <button type="submit" name="add">保存</button>
-
+                    <p class="title_name">コメント</p>
+                    <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value=""><br>
+                    <button class="save_button" type="submit" name="submit">保存</button>
+                </form>
             </div>
 
 <!-- ↓↓ 長尾さん、宮内さん、ここから下は触らないようにお願いします  ↓↓ -->

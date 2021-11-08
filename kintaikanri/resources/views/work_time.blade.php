@@ -28,55 +28,70 @@
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
         <div class="work_time">
 
-            <span id="viewTime"></span>
-            <script type="text/javascript">
-                timer = setInterval('clock()',1000); //時刻の更新
-                function clock() {
-                    document.getElementById("viewTime").innerHTML = getNow();
-                }
-                function getNow() {
-                    var now = new Date();
-                    var year = now.getFullYear();
-                    var mon = now.getMonth()+1; //１を足すこと
-                    var day = now.getDate();
-                    var hour = now.getHours();
-                    var min = now.getMinutes();
-                    var sec = now.getSeconds();
-                    var you = now.getDay(); //曜日
-                    //曜日の配列（日～土）
-                    var youbi = new Array("日","月","火","水","木","金","土");
-                    //出力用 
-                    var s = year + "年" + mon + "月" + day + "日 (" + youbi[you] + ")<br>" + hour + "時" + min + "分" + sec + "秒" ;
-                    return s;
-                }
-                window.onload = clock;  // ⇒ これにより、ブラウザに表示するのと同時に時刻も表示する事ができる
-            </script>
-
-            <br>
-
-            <div class="syukkin">
-                <span>出勤</span>
+            <div class="time_view" id="viewTime">
+                <script type="text/javascript">
+                    timer = setInterval('clock()',1000); //時刻の更新
+                    function clock() {
+                        document.getElementById("viewTime").innerHTML = getNow();
+                        document.getElementById("time_now").value = getNowTimestamp();
+                    }
+                    function getNow() {
+                        var now = new Date();
+                        var year = now.getFullYear();
+                        var mon = (now.getMonth()+1).toString().padStart(2, '0'); //１を足すこと
+                        var day = now.getDate().toString().padStart(2, '0');
+                        var hour = now.getHours().toString().padStart(2, '0');
+                        var min = now.getMinutes().toString().padStart(2, '0');
+                        var sec = now.getSeconds().toString().padStart(2, '0');
+                        var you = now.getDay(); //曜日
+                        //曜日の配列（日～土）
+                        var youbi = new Array("日","月","火","水","木","金","土");
+                        //出力用 
+                        var s = year + "/" + mon + "/" + day + "(" + youbi[you] + ")<br>" + hour + ":" + min + ":" + sec ;
+                        return s;
+                    }
+                    function getNowTimestamp() {   // ⇒ 送信用メソッド
+                        var now = new Date();
+                        var year = now.getFullYear();
+                        var mon = (now.getMonth()+1).toString().padStart(2, '0');   //１を足すこと
+                        var day = now.getDate().toString().padStart(2, '0');
+                        var hour = now.getHours().toString().padStart(2, '0');
+                        var min = now.getMinutes().toString().padStart(2, '0');
+                        var sec = now.getSeconds().toString().padStart(2, '0');
+                        //出力用 
+                        var s = year + "/" + mon + "/" + day + " " + hour + ":" + min + ":" + sec ;
+                        return s;
+                    }
+                    window.onload = clock;  // ⇒ これにより、ブラウザに表示するのと同時に時刻も表示する事ができる
+                </script>
             </div>
 
-            <div class="taikin">
-                <span>退勤</span>
-            </div>
+            <form action="{{ url('#勤退登録機能のRoute_nameを後で設定') }}" method="post">
+            @csrf
+                <input type="hidden" name="time_now" id="time_now">
+                <div class="time_circle">
+                    <div class="upclass">
+                        <input id="radio1" class="syukkin" type="radio" name="situation" value="出勤">
+                        <label class="syukkin" for="radio1">出勤</label>
+                        <input id="radio2" class="taikin" type="radio" name="situation" value="退勤">
+                        <label class="taikin" for="radio2">退勤</label>
+                    </div>
+                    <div class="downclass">
+                        <input id="radio3" class="kyuukeiiri" type="radio" name="situation" value="休憩入り">
+                        <label class="kyuukeiiri" for="radio3">休憩入り</label>
+                        <input id="radio4" class="kyuukeimodori" type="radio" name="situation" value="休憩戻り">
+                        <label class="kyuukeimodori" for="radio4">休憩戻り</label>
+                    </div>
+                </div>
 
-            <br>
+                <div class="comment_box">
+                    <input type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value="">
+                </div>
 
-            <div class="kyuukeiiri">
-                <span>休憩入り</span>
-            </div>
-
-            <div class="kyuukeimodori">
-                <span>休憩戻り</span>
-            </div>
-
-            <input type="text" id="comment" name="comment" size="80" style="width:535;border:1px solid #00ccff">
-            <form action="index.php" method="post">
-                <button type="submit" name="add">登録</button>
+                <button class="add_button" type="submit" name="submit">登録</button>
             </form>
-        
+            
+
 <!-- ↓↓ 長尾さん、宮内さん、ここから下は触らないようにお願いします  ↓↓ -->
         </div>
     </div>
