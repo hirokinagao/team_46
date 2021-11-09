@@ -68,7 +68,7 @@
 
             <form action="{{ url('#勤退登録機能のRoute_nameを後で設定') }}" method="post">
             @csrf
-                <input type="hidden" name="time_now" id="time_now">
+                <input type="hidden" name="time_now" id="time_now">  <!-- ← 時刻も一緒にformで飛ばす用（上記でsprigタグで書いた送信用メソッドに紐づく） -->
                 <div class="time_circle">
                     <div class="upclass">
                         <input id="radio1" class="syukkin" type="radio" name="situation" value="出勤">

@@ -7,34 +7,92 @@ html , body {
 .main{
     position: relative;
 }
-.area_item{ position: absolute; top: 0; left: 0;}
-.area{position: relative; display: flex;justify-content: flex-start; align-items: center;}
-.area h1{width: 100%; flex-grow: 1; text-align: center;}
+.area_item {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
+.area {
+    position: relative;
+    /* display: flex; */
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
 
-.mene{
-    color: #409fd9;
+.area h1 {
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.display_view {
+    width: 250px;
+    background-color: rgba(250, 250, 85, 0.5);
+    position: relative;
+    top:50px;
+    left: 1100px;
+}
+
+.display_in {
+    width: 100%;
+    text-align: center;
+    color: rgb(41, 41, 212);
+    font-weight: bold;
+}
+
+.display_view span {
+    margin-right: 10px;
+}
+
+.memu{
+    color: #2c8fcc;
     line-height: 55px;
 }
- .mene th{font-size: 15px;}
- .mene_top{
- font-size: 14px;
- line-height: 22px;
- }
+
+.memu th{
+    font-size: 17px;
+}
+
+.memu_top{
+font-size: 14px;
+line-height: 22px;
+}
+
 .chart{
 
 }
-th{
 
+th {
+    text-align: center;
+    font-weight: bold;
 }
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.comment_view{
+    text-align: left;
+}
+
+table{
+    width: 100%;
+}
+
 .table{
-    display: flex;
-    justify-content: space-around;
+    width: 1300px;
+    position: relative;
+    left: 50px;
+    top:20px;
+    margin-bottom: 50px;
+    /* display: flex; */
+    /* justify-content: space-around; */
     /* width: 50%; */
     /* letter-spacing: 15px; */
 }
-table{
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    width: 100%;
-}
+
