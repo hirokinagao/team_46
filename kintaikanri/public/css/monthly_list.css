@@ -16,11 +16,11 @@ html , body {
     color: #409fd9;
     line-height: 55px;
 }
- .mene th{font-size: 15px;}
- .mene_top{
- font-size: 14px;
- line-height: 22px;
- }
+.mene th{font-size: 15px;}
+.mene_top{
+font-size: 14px;
+line-height: 22px;
+}
 .chart{
 
 }

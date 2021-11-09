@@ -46,25 +46,22 @@
                     <th>コメント</th>
                     <th>編集</th>
                 </tr>
-                <form action="edit"method="post"></form>
-                <tr class="mene_top">
-                    <th>{{"10/1(金)"}}</th>
-                    <th>{{"08:00"}}</th>
-                    <th>{{"15:00"}}</th>
-                    <th>{{"1:00"}}</th>
-                    <th>{{"テスト"}}</th>
-                    <th><button type="submit">編集</button></th>
-                </tr>
-                </form>
-                <!-- テストデータができるまでその後消す -->
-                <tr class="mene_top">
-                    <th>{{"10/1(金)"}}</th>
-                    <th>{{"08:00"}}</th>
-                    <th>{{"15:00"}}</th>
-                    <th>{{"1:00"}}</th>
-                    <th>{{"テスト"}}</th>
-                </tr>
-                
+
+                @if(count($users) !== 0)
+                    <form action="edit" method="post">
+                    @csrf
+                        @foreach($users as $user)
+                        <tr class="mene_top">
+                            <th>{{$user->date}}</th>
+                            <th>{{$user->start_time}}</th>
+                            <th>{{$user->end_time}}</th>
+                            <th>{{$user->rest_on}}</th>
+                            <th>{{$user->comment}}</th>
+                            <th><button type="submit">編集</button></th>
+                        </tr>
+                        @endforeach
+                    </form>
+                @endif
 
             </table>
             </div>
