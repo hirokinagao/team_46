@@ -34,36 +34,57 @@
                     <input onchange="onclick" type="month" name="">
                     <button>PDF</button>
                 </div>
+
+                <div class="display_view">
+                    <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>
+                </div>
+
                 <h1>月別一覧</h1>
             </div>
-            <div class="table">
-            <table border="1">
-                <tr class="mene">
-                    <th class="mene_item">日付</th>
-                    <th>出勤</th>
-                    <th>退勤</th>
-                    <th>休憩</th>
-                    <th>コメント</th>
-                    <th>編集</th>
-                </tr>
 
-                @if(count($users) !== 0)
-                    <form action="edit" method="post">
+            <div class="table">
+                <table border="1">
+                    <tr class="memu">
+                        <th class="memu_item">日付</th>
+                        <th>出勤</th>
+                        <th>退勤</th>
+                        <th>休憩入り</th>
+                        <th>休憩戻り</th>
+                        <th>コメント</th>
+                        <th>編集</th>
+                    </tr>
+                    <form action="{{ url('post_edit') }}"method="post" name="dateform">
                     @csrf
-                        @foreach($users as $user)
-                        <tr class="mene_top">
-                            <th>{{$user->date}}</th>
-                            <th>{{$user->start_time}}</th>
-                            <th>{{$user->end_time}}</th>
-                            <th>{{$user->rest_on}}</th>
-                            <th>{{$user->comment}}</th>
-                            <th><button type="submit">編集</button></th>
+                        <?php
+                            $week = array( "日", "月", "火", "水", "木", "金", "土" );
+                        ?>
+                        @foreach( $work_times as $work_time )
+                        <?php
+                            $date =  $work_time -> date;
+                            $timestamp = strtotime ( $date );
+                        ?>
+                        <tr class="memu_top">
+                            <td>{{$work_time -> date . "(" .$week[date('w', $timestamp)] . ")"}}</td>
+                            <td>{{$work_time -> start_time}}</td>
+                            <td>{{$work_time -> end_time}}</td>
+                            <td>{{$work_time -> rest_on}}</td>
+                            <td>{{$work_time -> rest_back}}</td>
+                            <td class="comment_view">{{$work_time -> comment}}</td>
+                            <td><button onclick="submit_to_edit('{{ $date }}')">編集</button></td>
                         </tr>
                         @endforeach
+                        <input type="hidden" id="date" name="date">
+                        <input type="hidden" id="work_id" name="work_id" value="{{ $work_user->work_id }}">
                     </form>
-                @endif
 
-            </table>
+                    <script>
+                        function submit_to_edit(date){
+                            document.getElementById('date').value = date;
+                            document.dateform.submit();
+                        }
+                    </script>
+
+                </table>
             </div>
         </div>
         <!-- ↓↓ 長尾さん、宮内さん、ここから下は触らないようにお願いします  ↓↓ -->
@@ -72,3 +93,4 @@
 </body>
 
 </html>
+

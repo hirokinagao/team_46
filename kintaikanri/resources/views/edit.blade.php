@@ -31,21 +31,21 @@
                 @csrf
                     <div class="upclass">
                         <div class="shainn">
-                            <p class="title_name">社員ID</p>
-                            <input type="text" name="work_id" value="{{ '長尾さんができてからwork_id' }}"disabble>
+                            <p class="title_name1">社員ID</p>
+                            <input type="text" name="work_id" value="{{ $work_user->work_id }}"disabble>
                         </div>
 
                         <div class="simei">
-                            <p class="title_name">氏名</p>
-                            <input type="text" name="name" value="{{ '長尾さんができてからname' }}"disabble>
+                            <p class="title_name2">氏名</p>
+                            <input type="text" name="name" value="{{ $work_user->name }}"disabble>
                         </div>
                     </div>
                     
                     <div class="downclass">
                         <div class="select_kinnmu">
-                            <p class="title_name">勤務状況</p>
+                            <p class="title_name3">勤務状況</p>
                             <select name="kinmu">
-                                <option value="出勤">出勤</option>
+                                <option value="出勤" selected>出勤</option>
                                 <option value="退勤">退勤</option>
                                 <option value="休憩入">休憩入</option>
                                 <option value="休憩戻">休憩戻</option>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="jikoku">
-                            <p class="title_name">時刻</p>
+                            <p class="title_name4">時刻</p>
                             <div class="hour_minites">
                                 <select name="hour">
                                     @for($i = 0; $i <=23; $i++)
@@ -72,8 +72,8 @@
                         </div>
                     </div>
 
-                    <p class="title_name">コメント</p>
-                    <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value=""><br>
+                    <p class="title_name5">コメント</p>
+                    <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value="{{ $record->comment }}"><br>
                     <button class="save_button" type="submit" name="submit">保存</button>
                 </form>
             </div>
