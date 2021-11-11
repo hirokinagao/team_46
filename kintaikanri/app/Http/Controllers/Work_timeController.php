@@ -42,10 +42,10 @@ class Work_timeController extends Controller
      * @param Request $request 
      * @return Response
      */
-    // public function メソッド名(Request $request)
-    // {
+    //public function(Request $request)
+    //{
 
-    // }
+    //}
 
 
 

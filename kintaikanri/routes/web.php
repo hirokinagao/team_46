@@ -83,4 +83,4 @@ Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->
 /*******************
  * 勤退登録機能
  *******************/
-//Route::post('', 'App\Http\Controllers\Work_timeController@')->name('');
+Route::post('', 'App\Http\Controllers\Work_timeController@')->name('');
