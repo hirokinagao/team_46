@@ -41,10 +41,8 @@
                 <div class="display_view">
                     <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>
                 </div>
-
                 <h1>月別一覧</h1>
             </div>
-
             <div class="table">
                 <table border="1">
                     <tr class="memu" style="background-color:rgba(235, 235, 235, 0.8)">
