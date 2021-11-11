@@ -63,6 +63,14 @@ font-size: 14px;
 line-height: 22px;
 }
 
+.menu_button {
+    background-color: #3b85f5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 3px 10px;
+}
+
 th {
     text-align: center;
     font-weight: bold;
@@ -92,4 +100,5 @@ table{
     /* width: 50%; */
     /* letter-spacing: 15px; */
 }
+
 

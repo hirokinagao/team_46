@@ -83,7 +83,7 @@
                             <td>{{$work_time -> rest_on}}</td>
                             <td>{{$work_time -> rest_back}}</td>
                             <td class="comment_view">{{$work_time -> comment}}</td>
-                            <td><button onclick="submit_to_edit('{{ $date }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
+                            <td><button class="menu_button" onclick="submit_to_edit('{{ $date }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                         </tr>
                         @endforeach
                         <!-- EditControllerに必要な上記で足りないデータをhiddenで渡す -->
