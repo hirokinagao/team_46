@@ -5,6 +5,24 @@
     margin-top: 100px;
 }
 
+input {
+    outline: none;
+}
+
+.display_date {
+    width: 250px;
+    background-color: rgba(250, 250, 85, 0.5);
+    position: relative;
+    top:-5px;
+    left: 400px;
+    padding: 5px 0 5px 70px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing:0.1em;
+}
+
 .upclass , .downclass{
     display: flex;
     align-items: center;
@@ -47,6 +65,10 @@
 .title_name5 {
     position: relative;
     right: 310px;
+}
+
+select {
+    outline: none;
 }
 
 .sub_label {

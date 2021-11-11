@@ -32,17 +32,19 @@
                 <script type="text/javascript">
                     timer = setInterval('clock()',1000); //時刻の更新
                     function clock() {
-                        document.getElementById("viewTime").innerHTML = getNow();
-                        document.getElementById("time_now").value = getNowTimestamp();
+                        document.getElementById("viewTime").innerHTML = getNow();  // ⇒ 現在時刻取得用メソッド
+                        document.getElementById("date_now").value = getNowDate();  // ⇒ 送信用メソッド（<input type="hidden">で渡すよう）
+                        document.getElementById("time_now").value = getNowTimestamp();  // ⇒ 送信用メソッド（<input type="hidden">で渡すよう）
+                        
                     }
-                    function getNow() {
+                    function getNow() {   // ⇒ 現在時刻取得用メソッド
                         var now = new Date();
                         var year = now.getFullYear();
-                        var mon = (now.getMonth()+1).toString().padStart(2, '0'); //１を足すこと
-                        var day = now.getDate().toString().padStart(2, '0');
-                        var hour = now.getHours().toString().padStart(2, '0');
-                        var min = now.getMinutes().toString().padStart(2, '0');
-                        var sec = now.getSeconds().toString().padStart(2, '0');
+                        var mon = (now.getMonth()+1).toString().padStart(2, '0'); //２桁表示
+                        var day = now.getDate().toString().padStart(2, '0'); //２桁表示
+                        var hour = now.getHours().toString().padStart(2, '0'); //２桁表示
+                        var min = now.getMinutes().toString().padStart(2, '0'); //２桁表示
+                        var sec = now.getSeconds().toString().padStart(2, '0'); //２桁表示
                         var you = now.getDay(); //曜日
                         //曜日の配列（日～土）
                         var youbi = new Array("日","月","火","水","木","金","土");
@@ -50,25 +52,33 @@
                         var s = year + "/" + mon + "/" + day + "(" + youbi[you] + ")<br>" + hour + ":" + min + ":" + sec ;
                         return s;
                     }
-                    function getNowTimestamp() {   // ⇒ 送信用メソッド
+                    function getNowDate() {   // ⇒ 送信用メソッド
                         var now = new Date();
                         var year = now.getFullYear();
-                        var mon = (now.getMonth()+1).toString().padStart(2, '0');   //１を足すこと
+                        var mon = (now.getMonth()+1).toString().padStart(2, '0');
                         var day = now.getDate().toString().padStart(2, '0');
+                        //出力用 
+                        var s = year + "-" + mon + "-" + day;
+                        return s;
+                    }
+                    function getNowTimestamp() {   // ⇒ 送信用メソッド
+                        var now = new Date();
                         var hour = now.getHours().toString().padStart(2, '0');
                         var min = now.getMinutes().toString().padStart(2, '0');
                         var sec = now.getSeconds().toString().padStart(2, '0');
                         //出力用 
-                        var s = year + "/" + mon + "/" + day + " " + hour + ":" + min + ":" + sec ;
+                        var s = hour + ":" + min + ":" + sec ;
                         return s;
                     }
                     window.onload = clock;  // ⇒ これにより、ブラウザに表示するのと同時に時刻も表示する事ができる
                 </script>
             </div>
 
-            <form action="{{ url('#勤退登録機能のRoute_nameを後で設定') }}" method="post">
+            <form action="{{ url('/insert') }}" method="post">
             @csrf
+                <input type="hidden" name="date_now" id="date_now">  <!-- ← 年月も一緒にformで飛ばす用（上記でsprigタグで書いた送信用メソッドに紐づく） -->
                 <input type="hidden" name="time_now" id="time_now">  <!-- ← 時刻も一緒にformで飛ばす用（上記でsprigタグで書いた送信用メソッドに紐づく） -->
+                
                 <div class="time_circle">
                     <div class="upclass">
                         <input id="radio1" class="syukkin" type="radio" name="situation" value="出勤">

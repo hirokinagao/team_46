@@ -17,10 +17,10 @@ class CreateWorkTimesTable extends Migration
             $table->increments('id');
             $table->string('user_id');
             $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->time('rest_on');
-            $table->time('rest_back');
+            $table->time('start_time')->nullable()->default(null);
+            $table->time('end_time')->nullable()->default(null);
+            $table->time('rest_on')->nullable()->default(null);
+            $table->time('rest_back')->nullable()->default(null);
             $table->string('comment')->nullable()->default(null);
             $table->string('updated_id');
             $table->timestamps();

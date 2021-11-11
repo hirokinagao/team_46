@@ -27,17 +27,19 @@
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="edit">
-                <form action="{{ url('#編集機能のRoute_nameを後で設定') }}" method="post">
+                <form action="{{ url('update') }}" method="post">
                 @csrf
+                    <input class="display_date" type="text" name="date" id="date" value="{{ $record->date }}" readonly>
+                    
                     <div class="upclass">
                         <div class="shainn">
                             <p class="title_name1">社員ID</p>
-                            <input type="text" name="work_id" value="{{ $work_user->work_id }}"disabble>
+                            <input type="text" name="work_id" value="{{ $work_user->work_id }}" readonly>
                         </div>
 
                         <div class="simei">
                             <p class="title_name2">氏名</p>
-                            <input type="text" name="name" value="{{ $work_user->name }}"disabble>
+                            <input type="text" name="name" value="{{ $work_user->name }}" readonly>
                         </div>
                     </div>
                     

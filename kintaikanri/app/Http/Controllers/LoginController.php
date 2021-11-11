@@ -7,8 +7,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Work;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Log;  
         // ⇒ Log::errorを使用するためにセット
+
 
 class LoginController extends Controller
 {
@@ -37,6 +39,7 @@ class LoginController extends Controller
 
         //DBと照合してwork_idが一致するデータを探す
         $userdata = DB::table('users')->where('work_id', $work_id)->first();
+
         // ユーザーが存在しない or work_id が違う場合エラーメッセージを返しlogin画面に戻す
         if(empty($userdata)){
             $error_message = '社員番号が違います。';
@@ -45,7 +48,8 @@ class LoginController extends Controller
             ]);
             return $view;
         }
-        //「laravel.log」に出力させるためのコード（ここに出力させる事で入力された内容が確認ができる）
+
+        //「laravel.log」に出力させるためのコード（ここに出力させる事でpasswordなども入力された内容が確認ができる）
         Log::error($work_id);
         Log::error($password);
         Log::error($userdata->password);

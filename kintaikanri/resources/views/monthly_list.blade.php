@@ -32,8 +32,11 @@
             <div class="area">
                 <div class="area_item">
                     <input onchange="onclick" type="month" name="">
-                    <button>PDF</button>
                 </div>
+
+                <script>
+                    //この中に、カレンダーを選択したら、URLの末尾に「/一覧表示対象者のwork_id/年-月」を加えて、それを呼び出すというJavaScriptを書けばOK
+                </script>
 
                 <div class="display_view">
                     <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>
@@ -44,7 +47,7 @@
 
             <div class="table">
                 <table border="1">
-                    <tr class="memu">
+                    <tr class="memu" style="background-color:rgba(235, 235, 235, 0.8)">
                         <th class="memu_item">日付</th>
                         <th>出勤</th>
                         <th>退勤</th>
@@ -56,28 +59,40 @@
                     <form action="{{ url('post_edit') }}"method="post" name="dateform">
                     @csrf
                         <?php
-                            $week = array( "日", "月", "火", "水", "木", "金", "土" );
+                            $week = [ "日", "月", "火", "水", "木", "金", "土" ];
                         ?>
                         @foreach( $work_times as $work_time )
                         <?php
+                            //データを分解して代入
                             $date =  $work_time -> date;
                             $timestamp = strtotime ( $date );
+                            $w_num = date('w', $timestamp);
                         ?>
-                        <tr class="memu_top">
-                            <td>{{$work_time -> date . "(" .$week[date('w', $timestamp)] . ")"}}</td>
+                        <!-- 曜日の色分け（ 土曜:水色 , 日曜:ピンク ） -->
+                        <?php if ($w_num == 0) { ?>
+                            <tr class="menu_top menu_pink" style="background-color:#FFDDFF">
+                        <?php } else if ($w_num == 6) { ?>
+                            <tr class="menu_top menu_blue" style="background-color:#DDFFFF">
+                        <?php } else { ?>
+                            <tr class="menu_top">
+                        <?php } ?>
+                            <!-- 各<td>の表示内容指定 -->
+                            <td>{{$work_time -> date . "(" .$week[$w_num] . ")"}}</td>
                             <td>{{$work_time -> start_time}}</td>
                             <td>{{$work_time -> end_time}}</td>
                             <td>{{$work_time -> rest_on}}</td>
                             <td>{{$work_time -> rest_back}}</td>
                             <td class="comment_view">{{$work_time -> comment}}</td>
-                            <td><button onclick="submit_to_edit('{{ $date }}')">編集</button></td>
+                            <td><button onclick="submit_to_edit('{{ $date }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                         </tr>
                         @endforeach
+                        <!-- EditControllerに必要な上記で足りないデータをhiddenで渡す -->
                         <input type="hidden" id="date" name="date">
                         <input type="hidden" id="work_id" name="work_id" value="{{ $work_user->work_id }}">
                     </form>
 
                     <script>
+                        //編集ボタン押下時に作動するメソッド
                         function submit_to_edit(date){
                             document.getElementById('date').value = date;
                             document.dateform.submit();
