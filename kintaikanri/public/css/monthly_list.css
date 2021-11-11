@@ -61,6 +61,10 @@ html , body {
 font-size: 14px;
 line-height: 22px;
 }
+.menu_button{
+    background-color: #2d8fcc;
+    color: white;
+}
 
 th {
     text-align: center;

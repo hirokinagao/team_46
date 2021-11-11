@@ -32,16 +32,12 @@
             <div class="area">
                 <div class="area_item">
                     <input onchange="onclick" type="month" name="">
-                    <button>PDF</button>
                 </div>
-
                 <div class="display_view">
                     <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>
                 </div>
-
                 <h1>月別一覧</h1>
             </div>
-
             <div class="table">
                 <table border="1">
                     <tr class="memu">
@@ -70,7 +66,7 @@
                             <td>{{$work_time -> rest_on}}</td>
                             <td>{{$work_time -> rest_back}}</td>
                             <td class="comment_view">{{$work_time -> comment}}</td>
-                            <td><button onclick="submit_to_edit('{{ $date }}')">編集</button></td>
+                            <td><button class="menu_button" onclick="submit_to_edit('{{ $date }}')">編集</button></td>
                         </tr>
                         @endforeach
                         <input type="hidden" id="date" name="date">
