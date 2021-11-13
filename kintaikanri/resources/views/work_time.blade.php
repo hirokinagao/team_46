@@ -100,12 +100,9 @@
 
                 <button class="add_button" type="submit" name="submit">登録</button>
             </form>
-            
-
 <!-- ↓↓ 長尾さん、宮内さん、ここから下は触らないようにお願いします  ↓↓ -->
         </div>
     </div>
-
 </body>
 
 </html>

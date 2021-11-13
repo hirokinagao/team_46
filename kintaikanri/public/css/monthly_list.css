@@ -15,7 +15,6 @@ html , body {
 
 .area {
     position: relative;
-    /* display: flex; */
     justify-content: flex-start;
     align-items: center;
     margin-top: 20px;
@@ -63,17 +62,9 @@ html , body {
 font-size: 14px;
 line-height: 22px;
 }
-.menu_button{
-    background-color: #2d8fcc;
-    color: white;
-}
 
-.menu_button {
-    background-color: #3b85f5;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 3px 10px;
+.menu_nomal:hover {
+    background-color: rgba(185, 185, 185, 0.1);
 }
 
 th {
@@ -98,13 +89,24 @@ table{
     /* width: 1300px; */
     width: 1050px;
     position: relative;
-        left: 50px;
+    left: 50px;
     top:20px;
     margin-bottom: 50px;
-    /* display: flex; */
-    /* justify-content: space-around; */
-    /* width: 50%; */
-    /* letter-spacing: 15px; */
 }
 
+.menu_button {
+    background-color: #3b85f5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 3px 10px;
+}
+
+.menu_button:hover {
+    background-color: rgba(0, 174, 255, 0.76);
+}
+
+.menu_button:focus {
+    outline: none;
+}
 

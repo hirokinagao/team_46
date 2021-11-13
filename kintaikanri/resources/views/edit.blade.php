@@ -46,8 +46,8 @@
                     <div class="downclass">
                         <div class="select_kinnmu">
                             <p class="title_name3">勤務状況</p>
-                            <select name="kinmu">
-                                <option value="出勤" selected>出勤</option>
+                            <select name="kinmu" id="kinmu">
+                                <option value="出勤">出勤</option>
                                 <option value="退勤">退勤</option>
                                 <option value="休憩入">休憩入</option>
                                 <option value="休憩戻">休憩戻</option>
@@ -57,14 +57,14 @@
                         <div class="jikoku">
                             <p class="title_name4">時刻</p>
                             <div class="hour_minites">
-                                <select name="hour">
+                                <select name="hour" id="hour">
                                     @for($i = 0; $i <=23; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>;
                                     @endfor 
                                 </select>
                                 <p class="sub_label">時</p>
 
-                                <select name="minites" >
+                                <select name="minites" id="minites">
                                     @for($i = 0; $i <=59; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>;
                                     @endfor
@@ -74,16 +74,46 @@
                         </div>
                     </div>
 
+                    <script>
+                        //上のselectタグ同士の紐づけ（ 状況と時間 ）
+                        window.addEventListener('DOMContentLoaded', ()=>{
+                            document.querySelector('#kinmu').addEventListener('change', e=>{
+                                //取得した値を配列に代入
+                                var times = [
+                                    '{{ $record->start_time }}',
+                                    '{{ $record->end_time }}',
+                                    '{{ $record->rest_on }}',
+                                    '{{ $record->rest_back }}'
+                                ];
+                                //「e」イベントが発動したら、<select>の配列要素の番号がselectedIndexになる
+                                // 打刻がない場合は'0:0'を入れる
+                                if (times[e.target.selectedIndex] == '') {
+                                    times[e.target.selectedIndex] = '0:0';
+                                }
+                                // データを「時」と「分」に分割（「:」で分割 ⇒ 前後で配列になる ）
+                                var time = times[e.target.selectedIndex].split(':');
+                                document.querySelector('#hour').selectedIndex = parseInt(time[0]);  //parseIntは文字列を整数型に直してる ⇒ その数字が配列の数字として<select>のselectedIndexに代入される
+                                document.querySelector('#minites').selectedIndex = parseInt(time[1]); //                                                                             ↑↑ selectedIndex ⇒ これが選択している要素の数字になる
+                            });
+                        });
+                        
+                        //最初に「出勤」を表示させるためのメソッド（ 最初に「出勤」を選択し、start_timeを表示させておく ）
+                        function selectAtLoad() {
+                            var time = '{{ $record->start_time }}'.split(':');
+                            document.querySelector('#hour').selectedIndex = parseInt(time[0]);
+                            document.querySelector('#minites').selectedIndex = parseInt(time[1]);
+                        }
+                        window.onload = selectAtLoad;
+                    </script>
+
                     <p class="title_name5">コメント</p>
                     <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value="{{ $record->comment }}"><br>
                     <button class="save_button" type="submit" name="submit">保存</button>
                 </form>
             </div>
-
 <!-- ↓↓ 長尾さん、宮内さん、ここから下は触らないようにお願いします  ↓↓ -->
         </div>
     </div>
-
 </body>
 
 </html>

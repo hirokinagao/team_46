@@ -38,6 +38,7 @@ class Work_timeController extends Controller
     }
 
 
+
     /**
      * 勤退登録機能
      * 
@@ -71,6 +72,7 @@ class Work_timeController extends Controller
                 'updated_id' => $work_id  //更新者(登録者)のwork_id
             ]);
         } else {
+            //コメントを上書きしないための処理
             $comment = $request->comment;
             if($comment == ''){
                 $comment = $today_record->comment;
@@ -87,6 +89,7 @@ class Work_timeController extends Controller
 
         return redirect('/monthly_list');
 
+        //今回の場合は1つのカラムに何度も登録する為、上記のように条件分岐の処理が必要。よって ↓↓ 以下のシンプルな処理では登録処理ができない×
         // DB::table('work_times')->insert([
         //     'date' => $request->time_now,
         //     'start_time' => $request->start_time,

@@ -33,6 +33,7 @@ class EditController extends Controller
     // }
 
 
+
     /**
      * 会員編集機能(保存ボタン押下後)
      * 
@@ -68,20 +69,21 @@ class EditController extends Controller
         } else if ($situation == '休憩戻') {
             $situation = 'rest_back';
         }
-        //コメントを上書きしないための処理
+        //コメントを上書きしないための処理（ ← 編集の場合は勤退登録時と逆で、コメントを消したい場合は「''」で上書きできないとダメなので、このif分の処理はコメントアウトし、上書き内容のみを代入）
         $vars = [];
-        if($request->comment == ''){
-            $vars = [
-                $situation => $time,
-                'updated_id' => $login_work_id  //更新者のwork_id
-            ];
-        } else {
+        // if($request->comment == ''){
+        //     $vars = [
+        //         $situation => $time,
+        //         'updated_id' => $login_work_id  //更新者のwork_id
+        //     ];
+        // } else {
             $vars = [
                 $situation => $time,
                 'comment' => $request->comment,
                 'updated_id' => $login_work_id  //更新者のwork_id
-            ];            
-        }
+            ];
+        // }
+
         //DBのデータを更新
         DB::table('work_times')->where('user_id', $work_id)->where('date', $date)->update($vars);
 

@@ -55,16 +55,16 @@ Route::post('/search', 'App\Http\Controllers\AdminController@search')->name('sea
  *******************/
 Route::get('/monthly_list', 'App\Http\Controllers\Monthly_listController@monthly_list')->name('monthly_list');
 
-/************************************************
- * 月別一覧画面機能(編集ボタン押下後に編集画面表示)
- ************************************************/
-Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit')->name('post_edit');
-
 /*******************************************
  * 月別一覧画面表示(管理者ページからの遷移用)
  *******************************************/
 Route::get('/monthly_list/{id}', 'App\Http\Controllers\Monthly_listController@monthly_id')->name('monthly_id');
 Route::get('/monthly_list/{id}/{date}', 'App\Http\Controllers\Monthly_listController@monthly_id_date')->name('monthly_id_date');
+
+/************************************************
+ * 月別一覧画面機能(編集ボタン押下後に編集画面表示)
+ ************************************************/
+Route::post('/post_edit', 'App\Http\Controllers\Monthly_listController@post_edit')->name('post_edit');
 
 
 

@@ -14,17 +14,23 @@ class Monthly_listController extends Controller
     /**
      * 月別一覧画面表示
      *      (下のmonthly_idメソッドとmonthly_id_dateが完成したため、必要な情報のみを残してｺﾒﾝﾄｱｳﾄし、必要な情報を引数として下のメソッドに渡す)
+     *      ( monthly_list , monthly_id , monthly_id_date の３つのメソッド ⇒ 最終的にmonthly_id_dateメソッドに繋がるが、渡す引数がそれぞれ違う為、動作が異なる)
+     *              ↓↓
+     *        ( monthly_listは、引数がログインした人の work_id と「''」のdate )
+     *        ( monthly_idは、引数が管理者画面で指定した人の work_id と「''」のdate ) 
+     *        ( monthly_id_dateは引数に上のどちらかが渡されて、同じ処理をするメソッド ※dateに関して「''」の時とそれ以外で動作を分ける処理もしている ) 
      *
-     * @param Request $request ⇒ここの$requestはsessionのデータ
+     * @param Request $request ⇒ここの$requestはsessionのデータ、login時の送信データ
      * @return Response
      */
+    //「セッション情報」と「ログインした人のwork_id」と「''空のデータ」を最終的に下の「monthly_id_dateメソッド」に渡す
     public function monthly_list(Request $request)
     {
         //$requestの情報を代入
         // $id = $request->session()->get('id');
         // $name = $request->session()->get('name');
         // $role = $request->session()->get('role');
-        $work_id = $request->session()->get('work_id');
+        $work_id = $request->session()->get('work_id');  //ログインした人のwork_id
 
         //☆idがなかった場合(ログインしたかのチェック) ⇒ アドレス直打ちでのブラウザ表示を拒否するため
         // if(empty($id)){
@@ -44,27 +50,28 @@ class Monthly_listController extends Controller
         // ]);
         // return $view;
 
-        return $this->monthly_id($request,$work_id); //このメソッドは管理者画面からの遷移ではないから、セッションの情報と、セッションのwork_idを引数として渡してる
+        return $this->monthly_id($request,$work_id); //「セッション情報」と「ログインした人のwork_id」と「''空のデータ」をmonthly_idを利用して最終的に下の「monthly_id_dateメソッド」に渡す（monthly_idを利用するのは「''」空のデータを渡すため）
     }
+
+
 
 
 
     /**
      * 管理者ページから月別一覧画面を表示する用
-     *      (一般ユーザーの場合にも、このメソッドを使用する為、上のmonthly_listメソッドはｺﾒﾝﾄｱｳﾄし、必要な引数だけを、このmonthly_idメソッドに渡している)
+     *      (一般ユーザーの場合にも、このメソッドを使用する為、上のmonthly_listメソッドの被ってる内容はｺﾒﾝﾄｱｳﾄし、必要な引数だけを、このmonthly_idメソッドに渡している)
      *
      * @param Request $request  ⇒ここの$requestはsessionのデータ
      * @return Response
      */
-
-    // ①「セッション情報」と「リンクから飛んだwork_id」と「''空のデータ」を下の「monthly_id_dateメソッド」に返す
-    public function monthly_id(Request $request,string $work_id)  // ⇒ Routeでセットした「/monthly_list/{id}」の「{id}」に当たるのが$work_id
+    //「セッション情報」と「リンクから飛んだwork_id」と「''空のデータ」を下の「monthly_id_dateメソッド」に渡す
+    public function monthly_id(Request $request,string $work_id)  // ⇒ Routeでセットした「/monthly_list/{id}」の「{id}」に当たるのが$work_id(管理者画面で指定した人の work_id)
     {
         return $this->monthly_id_date($request,$work_id,'');  // $this：このclassのって意味、「''」空のデータを渡すことでリアルタイムの年月を下のメソッドで「''」へ代入できる
     }
 
-    // ②上のメソッドから渡された「セッション情報」と「リンクから飛んだwork_id」と「リアルタイムを代入する用の「''」空のデータ」を使い、「''」空のデータにはリアルタイムの年月を代入して画面遷移する
-    public function monthly_id_date(Request $request,string $work_id,string $date)  // ⇒ Routeでセットした「/monthly_list/{id}/{date}」の「{date}」に当たるのが$date
+    //上の2つのどちらかのメソッドから渡された、「セッション情報」と「work_id」と「リアルタイムを代入する用の「''」空のデータを使い、メソッドを動かし画面遷移
+    public function monthly_id_date(Request $request,string $work_id,string $date)  // ⇒ monthly_listメソッド or monthly_idメソッド のどちらかの引数と「''」空のdateを引数としてmonthly_id_dateメソッドを動かす
     {
         //$requestの情報を代入
         $id = $request->session()->get('id');
