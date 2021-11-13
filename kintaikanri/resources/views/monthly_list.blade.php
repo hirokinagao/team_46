@@ -31,19 +31,15 @@
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="area">
                 <div class="area_item">
-                    <input onchange="onclick" type="month" name="" id="upload_url" >
+                    <input onchange="getdate()" type="month" name="">
                 </div>
 
-                <!-- //カレンダーを選択したら、URLの末尾に「/一覧表示対象者のwork_id/年-月」を加えて、それを呼び出すメソッド -->
-                <script>
-                    document.getElementById("upload_url").innerHTML = addUrl();
-                    function addUrl() {
-                        // パラメータ追加
-                        $(document).on('click', '#upload_url', function() {
-                            location.search = '/{{ $work_user->work_id }}';
-                        });
+                    <script>
+                    // 年月が変更された時に作動するメソッド
+                    function getdate(){
+                        var url = history.pushState('','','document.getElementById('date').value = date;');
                     }
-                </script>
+                    </script>
 
                 <div class="display_view">
                     <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>
