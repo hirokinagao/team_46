@@ -31,10 +31,14 @@
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="area">
                 <div class="area_item">
-                    <input onchange="onclick" type="month" name="">
+                    <input onchange="getdate()" type="month" name="">
                 </div>
 
                 <script>
+                    // 年月が変更された時に作動するメソッド
+                    function getdate(){
+                        var url = history.pushState('','','document.getElementById('date').value = date;');
+                    }
                     //この中に、カレンダーを選択したら、URLの末尾に「/一覧表示対象者のwork_id/年-月」を加えて、それを呼び出すというJavaScriptを書けばOK
                 </script>
 

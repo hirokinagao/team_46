@@ -21,9 +21,9 @@
     <div class="login-wrapper">
         <div class="container">
             <img src="./img/logo.png" alt="ロゴ画像">
-            <form action="{{ url('login_session')}}" method="post">  
+            <form action="{{ url('login_session')}}" method="post">
                 @csrf
-                @isset($message)
+                @if(isset($message))
                     <p class="message">{{$message}}</p>
                 @endif
                 <input type="text" name="work_id" id="work_id" placeholder="社員ID" maxlength="10" required autofocus><br>
