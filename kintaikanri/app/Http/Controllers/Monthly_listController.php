@@ -54,9 +54,6 @@ class Monthly_listController extends Controller
     }
 
 
-
-
-
     /**
      * 管理者ページから月別一覧画面を表示する用
      *      (一般ユーザーの場合にも、このメソッドを使用する為、上のmonthly_listメソッドの被ってる内容はｺﾒﾝﾄｱｳﾄし、必要な引数だけを、このmonthly_idメソッドに渡している)
@@ -84,6 +81,11 @@ class Monthly_listController extends Controller
             return redirect('login');
         }
 
+        // 管理者ユーザー以外は、他社員の月別一覧画面が見れてはいけない為、一般ユーザーが、URLの末尾に「/一覧表示対象者のwork_id/年-月」を直打ちで入力しても、該当の月別一覧画面に遷移できないようにする
+        if($role == 0 && $login_work_id != $work_id) {
+            return redirect('/monthly_list');
+        }
+
         //上のメソッドで「''」空のデータを受け取ったから、そこに表示させたいリアルタイムの年月のデータを代入する
         if (empty($date)) {
             $date = date('Y-m');
@@ -98,6 +100,7 @@ class Monthly_listController extends Controller
         $user = DB::table('users')->where('work_id',$work_id)->first();   // ⇒ 月別一覧の上に、一覧表示する対象の「社員IDと社員氏名」を表示する用
 
         $view = view('monthly_list', [
+            'work_month' => $date,            //上記でDBから取得したデータ(カレンダー表示用の<input>の「value」に代入する用：リアルタイムの年月を初期表示させる用)
             'work_times' => $work_times,      //上記でDBから取得したデータ
             'work_user' => $user,             //上記でDBから取得したデータ
             'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)

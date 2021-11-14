@@ -87,7 +87,10 @@ class EditController extends Controller
         //DBのデータを更新
         DB::table('work_times')->where('user_id', $work_id)->where('date', $date)->update($vars);
 
-        return redirect('/monthly_list');
+        // return redirect('/monthly_list');
+            // ↑↑ これだと編集ボタン押下後に、編集される人のページではなくログインした人(管理者自身のページ)に遷移してしまうので ↓↓ 下のコードを採用する
+        list($year, $month, $day) = preg_split('/-/', $date);  // $dateは「年-月-日」のデータなので、「-」で区切ってそれぞれに分ける
+        return redirect('/monthly_list/'.$work_id.'/'.$year.'-'.$month);  // 「編集される人のwork_id」と、上で分けた「年」と「月」を引数に持たせてmonthly_list.bladeを呼び出すことで、編集される人の指定の月の月別一覧画面へ遷移できる
     }
 
 }

@@ -30,16 +30,17 @@
 
 <!-- ↓↓ 長尾さん、宮内さんは ここから下から各自のコードを書き始めていただければ大丈夫です ↓↓ -->
             <div class="area">
-                <div class="area_item">
-                    <input onchange="getdate()" type="month" name="">
+                <div class="area_item">                                                     <!--  ↓↓ ここのvalueに指定の月が入る（最初はリアルタイムの年月が入るように設定してある）  -->
+                    <input onchange="changeCal()" type="month" name="upload_url" id="upload_url" value="{{ $work_month }}" >
+                            <!-- ↑ onchange は「値が変わったら」という意味、ここでは「値（value）が変わったら = カレンダーが選択されたら」changeCalメソッドを呼び出している -->
                 </div>
 
-                    <script>
-                    // 年月が変更された時に作動するメソッド
-                    function getdate(){
-                        var url = history.pushState('','','document.getElementById('date').value = date;');
+                <script>
+                    //カレンダーを選択したら、URLの末尾に「/ 一覧表示対象者のwork_id / 上記の<input>の「onchange」で指定された年-月」を加えて、それを呼び出すメソッド
+                    function changeCal(){
+                        window.location.href = '/monthly_list/{{ $work_user->work_id }}/' + document.getElementById('upload_url').value;
                     }
-                    </script>
+                </script>
 
                 <div class="display_view">
                     <p class="display_in"><span>{{ $work_user->work_id }}</span><span>{{ $work_user->name }}</span></p>

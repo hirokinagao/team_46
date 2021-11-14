@@ -40,7 +40,7 @@ class Work_timeController extends Controller
 
 
     /**
-     * 勤退登録機能
+     * 勤退登録機能(登録ボタン押下後に月別一覧画面表示)
      * 
      * @param Request $request
      * @return Response

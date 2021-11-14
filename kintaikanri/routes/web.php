@@ -87,7 +87,7 @@ Route::post('/update', 'App\Http\Controllers\EditController@update')->name('upda
  *******************/
 Route::get('/work_time', 'App\Http\Controllers\Work_timeController@work_time')->name('work_time');
 
-/*******************
- * 勤退登録機能
- *******************/
+/************************************************
+ * 勤退登録機能(登録ボタン押下後に月別一覧画面表示)
+ ************************************************/
 Route::post('/insert', 'App\Http\Controllers\Work_timeController@insert')->name('insert');
