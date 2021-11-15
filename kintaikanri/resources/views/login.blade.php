@@ -26,8 +26,10 @@
                 @if(isset($message))
                     <p class="message">{{$message}}</p>
                 @endif
-                <input type="text" name="work_id" id="work_id" placeholder="社員ID" maxlength="10" required autofocus><br>
-                <input type="password" name="password" id="password" placeholder="password" maxlength="20" required><br>
+                <input type="text" name="work_id" id="work_id" placeholder="社員ID" maxlength="10" value="{{ $work_id ?? '' }}" required autofocus><br>
+                                                <!-- 「$work_id ?? ''」⇒ $work_idを表示するが、もし空だったら空表示：$work_idは初期画面では空だから「''」を入れとかないとエラーになる -->
+                <input type="password" name="password" id="password" placeholder="password" maxlength="20" value="{{ $password ?? '' }}" required><br>
+                                                <!-- 「$password ?? ''」⇒ $passwordを表示するが、もし空だったら空表示：$passwordは初期画面では空だから「''」を入れとかないとエラーになる -->                
                 <button class="btn login" type="submit">login</button>
             </form>
         </div>

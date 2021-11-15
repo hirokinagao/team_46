@@ -80,11 +80,11 @@
                             <tr class="menu_top menu_nomal">
                         <?php } ?>
                             <!-- 各<td>の表示内容指定 -->
-                            <td>{{$work_time -> date . "(" .$week[$w_num] . ")"}}</td>
-                            <td>{{$work_time -> start_time}}</td>
-                            <td>{{$work_time -> end_time}}</td>
-                            <td>{{$work_time -> rest_on}}</td>
-                            <td>{{$work_time -> rest_back}}</td>
+                            <td class="date_view">{{$work_time -> date . "(" .$week[$w_num] . ")"}}</td>
+                            <td class="time_view">{{$work_time -> start_time != '' ? substr($work_time -> start_time , 0, -3) : '' }}</td> <!-- start_timeが空じゃなかったら、0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字） -->
+                            <td class="time_view">{{$work_time -> end_time != '' ? substr($work_time -> end_time , 0, -3) : '' }}</td>
+                            <td class="time_view">{{$work_time -> rest_on != '' ? substr($work_time -> rest_on , 0, -3) : '' }}</td>
+                            <td class="time_view">{{$work_time -> rest_back != '' ? substr($work_time -> rest_back , 0, -3) : '' }}</td>
                             <td class="comment_view">{{$work_time -> comment}}</td>
                             <td><button class="menu_button" onclick="submit_to_edit('{{ $date }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                         </tr>

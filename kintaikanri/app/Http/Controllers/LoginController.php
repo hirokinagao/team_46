@@ -45,6 +45,8 @@ class LoginController extends Controller
             $error_message = '社員番号が違います。';
             $view = view('login', [
                 'message' => $error_message,
+                'work_id' => $work_id,      //エラーでlogin画面に、また遷移する際に、入力したデータを残して表示させときたい為に、この値も表示用に渡す
+                'password' => $password,    //エラーでlogin画面に、また遷移する際に、入力したデータを残して表示させときたい為に、この値も表示用に渡す
             ]);
             return $view;
         }
@@ -60,6 +62,8 @@ class LoginController extends Controller
             $error_message = 'パスワードが違います。';
             $view = view('login', [
                 'message' => $error_message,
+                'work_id' => $work_id,      //エラーでlogin画面に、また遷移する際に、入力したデータを残して表示させときたい為に、この値も表示用に渡す
+                'password' => $password,    //エラーでlogin画面に、また遷移する際に、入力したデータを残して表示させときたい為に、この値も表示用に渡す
             ]);
             return $view;
         }
