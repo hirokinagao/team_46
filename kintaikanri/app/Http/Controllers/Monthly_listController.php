@@ -88,24 +88,33 @@ class Monthly_listController extends Controller
 
         //上のメソッドで「''」空のデータを受け取ったから、そこに表示させたいリアルタイムの年月のデータを代入する
         if (empty($date)) {
-            $date = date('Y-m');
-        }
-        $yyyy = explode("-", $date)[0]; //リアルタイムの今年
+            $date = date('Y-m');    //date関数は指定された日時を任意の形式（今回は('Y-m')）でフォーマットし、日付文字列を返す関数  https://www.sejuku.net/blog/21821
+        }                           //       ↓↓
+                                        // 第一引数にフォーマット文字列を指定
+                                        // 第二引数を省略した場合は、現在日時が第一引数で指定した形式でフォーマットされる
+                                        // 第二引数にUNIXタイムスタンプを指定した場合は、そのUNIXタイムスタンプがフォーマットされる
+                                        // UNIXタイムスタンプとは、1970年1月1日からの秒数
+
+        $yyyy = explode("-", $date)[0]; //リアルタイムの今年     //explode関数：文字列を指定した文字列で分割する関数
         $mm = explode("-", $date)[1]; //リアルタイムの今月
         $fromDD = date('Y-m-d', mktime(0, 0, 0, $mm, 1, $yyyy)); //今月の1日
         $toDD = date('Y-m-d', mktime(0, 0, 0, $mm + 1, 0, $yyyy)); //今月の末日( = 次の月の0日)
         
         //DBと照合してデータ検索
-        $work_times = DB::table('work_times')->where('user_id',$work_id)->whereBetween('date', [$fromDD, $toDD])->get(); // ⇒ dateのカラムの[$fromDD, $toDD]までに期間を取ってくる
+        $work_times = DB::table('work_times')->where('user_id',$work_id)->whereBetween('date', [$fromDD, $toDD])->orderBy('date','asc')->get();
+                         // ⇒ dateのカラムの[$fromDD, $toDD]までに期間を取ってくる、orderByを付ける理由：空データに後で「編集」からデータをinsrtした場合に、データは入っても画面に表示されない現象が起こる為
         $user = DB::table('users')->where('work_id',$work_id)->first();   // ⇒ 月別一覧の上に、一覧表示する対象の「社員IDと社員氏名」を表示する用
 
         $view = view('monthly_list', [
             'work_month' => $date,            //上記でDBから取得したデータ(カレンダー表示用の<input>の「value」に代入する用：リアルタイムの年月を初期表示させる用)
             'work_times' => $work_times,      //上記でDBから取得したデータ
             'work_user' => $user,             //上記でDBから取得したデータ
+            'year' => $yyyy,                  //上記で定義したリアルタイムの今年
+            'month' => $mm,                   //上記で定義したリアルタイムの今月
             'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
             'user_role' => $role,
             'work_id' => $login_work_id,
+
         ]);
         return $view;
     }
@@ -139,8 +148,9 @@ class Monthly_listController extends Controller
         $work_user = DB::table('users')->where('work_id',$work_id)->first();   // ⇒ 月別一覧の上に、一覧表示する対象の「社員IDと社員氏名」を表示する用
 
         $view = view('edit', [
-            'record' => $record,         //上記でDBから取得したデータ
+            'record' => $record,         //上記でDBから取得したデータ(該当の社員IDの人の該当の年月日のデータ)
             'work_user' => $work_user,   //上記でDBから取得したデータ
+            'date' => $date,             //上記で$requestの情報から取得したデータ
             'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
             'user_role' => $role,
             'work_id' => $login_work_id,

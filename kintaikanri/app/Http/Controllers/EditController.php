@@ -69,28 +69,58 @@ class EditController extends Controller
         } else if ($situation == '休憩戻') {
             $situation = 'rest_back';
         }
+
+        //DBから該当の'user_id'と'date'のデータを１行取ってくる
+        $today_record = DB::table('work_times')->where('user_id', $work_id)->where('date', $date)->first();
+        //登録時の判別(最初の登録はinsert、それ以降の登録はupdate)
+        if (empty($today_record)) {   // empty($today_record) ＝ 上記のDBの処理で、該当のデータがなかったという事なので、全てのデータを渡さないといけない
+            // 登録(データが空の時)
+            DB::table('work_times')->insert([
+                'user_id' => $work_id,
+                'date' => $date,
+                $situation => $time,
+                'comment' => $request->comment,
+                'updated_id' => $login_work_id  //更新者のwork_id
+            ]);
+        } else {                      // empty($today_record)ではなかったら ＝ 上記のDBの処理で、該当のデータがあったという事なので、足りないデータのみを渡せばよい
+            // 更新(データが入っている場合)
+            DB::table('work_times')->where('user_id', $work_id)->where('date', $request->date)->update([
+                $situation => $time,
+                'comment' => $request->comment,
+                'updated_id' => $login_work_id  //更新者のwork_id
+            ]);
+        }
+
+        // return redirect('/monthly_list');
+            // ↑↑ これだと編集ボタン押下後に、編集される人のページではなくログインした人(管理者自身のページ)に遷移してしまうので ↓↓ 下のコードを採用する
+        list($year, $month, $day) = preg_split('/-/', $date);  // $dateは「年-月-日」のデータなので、「-」で区切ってそれぞれに分ける
+        return redirect('/monthly_list/'.$work_id.'/'.$year.'-'.$month);  // 「編集される人のwork_id」と、上で分けた「年」と「月」を引数に持たせてmonthly_list.bladeを呼び出すことで、編集される人の指定の月の月別一覧画面へ遷移できる
+
+
+        //上記の処理に変更した為、以下のコードは使用しない
+        //    ↓↓
         //コメントを上書きしないための処理（ ← 編集の場合は勤退登録時と逆で、コメントを消したい場合は「''」で上書きできないとダメなので、このif分の処理はコメントアウトし、上書き内容のみを代入）
-        $vars = [];
+        // $vars = [];
         // if($request->comment == ''){
         //     $vars = [
         //         $situation => $time,
         //         'updated_id' => $login_work_id  //更新者のwork_id
         //     ];
         // } else {
-            $vars = [
-                $situation => $time,
-                'comment' => $request->comment,
-                'updated_id' => $login_work_id  //更新者のwork_id
-            ];
+            // $vars = [
+            //     $situation => $time,
+            //     'comment' => $request->comment,
+            //     'updated_id' => $login_work_id  //更新者のwork_id
+            // ];
         // }
 
         //DBのデータを更新
-        DB::table('work_times')->where('user_id', $work_id)->where('date', $date)->update($vars);
+        // DB::table('work_times')->where('user_id', $work_id)->where('date', $date)->update($vars);
 
         // return redirect('/monthly_list');
             // ↑↑ これだと編集ボタン押下後に、編集される人のページではなくログインした人(管理者自身のページ)に遷移してしまうので ↓↓ 下のコードを採用する
-        list($year, $month, $day) = preg_split('/-/', $date);  // $dateは「年-月-日」のデータなので、「-」で区切ってそれぞれに分ける
-        return redirect('/monthly_list/'.$work_id.'/'.$year.'-'.$month);  // 「編集される人のwork_id」と、上で分けた「年」と「月」を引数に持たせてmonthly_list.bladeを呼び出すことで、編集される人の指定の月の月別一覧画面へ遷移できる
+        //list($year, $month, $day) = preg_split('/-/', $date);  // $dateは「年-月-日」のデータなので、「-」で区切ってそれぞれに分ける
+        //return redirect('/monthly_list/'.$work_id.'/'.$year.'-'.$month);  // 「編集される人のwork_id」と、上で分けた「年」と「月」を引数に持たせてmonthly_list.bladeを呼び出すことで、編集される人の指定の月の月別一覧画面へ遷移できる
+    
     }
-
 }

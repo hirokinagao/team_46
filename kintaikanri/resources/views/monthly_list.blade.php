@@ -62,33 +62,72 @@
                     <form action="{{ url('post_edit') }}"method="post" name="dateform">
                     @csrf
                         <?php
-                            $week = [ "日", "月", "火", "水", "木", "金", "土" ];
+                            // 今月の最初の日（11/1）のタイムスタンプを取得
+                            $start_of_month = mktime(0, 0, 0, $month, 1, $year);   // mktime関数：指定した日時のタイムスタンプを取得するためのメソッド、引数は第1引数から順番に時間、分、秒、月、日、年、https://techacademy.jp/magazine/39497
+                            // 今月の最後の日（11/30）のタイムスタンプを取得  // 末日( = 次の月の0日)
+                            $end_of_month = mktime(0, 0, 0, $month + 1, 0, $year);
+                            
+                            $week = array( "日", "月", "火", "水", "木", "金", "土" );
                         ?>
-                        @foreach( $work_times as $work_time )
+
                         <?php
-                            //データを分解して代入
-                            $date =  $work_time -> date;
-                            $timestamp = strtotime ( $date );
-                            $w_num = date('w', $timestamp);
+                            $j = 0;   //( $work_times as $work_time の $work_timeにあたるのが $j )
+                            // var_dump($work_times);
+                            for ($i = 1; $i <= date('d', $end_of_month); $i++) {   // 1に+1ずつしていく( 11/1～$end_of_monthまで(11/30まで) )
+                                $date = mktime(0, 0, 0, $month, $i, $year);     // $year(controllerから渡された値),$month(controllerから渡された値),$i(1～末日)のタイムスタンプを取得
+                                $w_num = date('w',$date);     // $year,$month,$i(1～末日)のタイムスタンプから曜日を取得(date関数の「w」：数字 0(日曜) から 6(土曜))
+                                                               //date関数は指定された日時を任意の形式（今回は('w')）でフォーマットし、日付文字列を返す関数  https://techacademy.jp/magazine/36439 , https://www.sejuku.net/blog/21821
+                                                                //       ↓↓
+                                                                // 第一引数にフォーマット文字列を指定
+                                                                // 第二引数を省略した場合は、現在日時が第一引数で指定した形式でフォーマットされる
+                                                                // 第二引数にUNIXタイムスタンプを指定した場合は、そのUNIXタイムスタンプがフォーマットされる
+                                                                // UNIXタイムスタンプとは、1970年1月1日からの秒数
+                                
+                                $work_timestamp = 0;    // $jがある時のタイムスタンプを取得する ⇒ もし今月の一月分のデータ空じゃなかったら && $work_timesが$j以上( ＝もう表示するものがないかどうか＝まだ{}内の処理をできるものが残っているかどうか)だったら、{}内の処理 ⇒ $work_timesのjのデータからdateを１日ずつ値を持ってきて$work_timestampに代入(タイムスタンプ取得)
+                                if ( !$work_times->isEmpty() && $j < count($work_times) ) {  // $work_times(controllerから渡された値)  // isEmpty , count：https://www.delftstack.com/ja/howto/php/how-to-check-whether-an-array-is-empty-in-php/
+                                    $work_timestamp = strtotime( $work_times[$j]->date );    //strtotime関数：指定した日時のUNIXタイムスタンプを取得する  https://www.sejuku.net/blog/21821
+                                }
                         ?>
-                        <!-- 曜日の色分け（ 土曜:水色 , 日曜:ピンク ） -->
-                        <?php if ($w_num == 0) { ?>                                         <!-- ↓↓ cssの「:hover」の役割 -->
-                            <tr class="menu_top menu_pink" style="background-color:#FFDDFF" onMouseOut="this.style.background='#FFDDFF';" onMouseOver="this.style.background='rgba(250, 162, 235, 0.5)'">
-                        <?php } else if ($w_num == 6) { ?>
-                            <tr class="menu_top menu_blue" style="background-color:#DDFFFF" onMouseOut="this.style.background='#DDFFFF';" onMouseOver="this.style.background='rgba(63, 166, 235, 0.2)'">
-                        <?php } else { ?>
-                            <tr class="menu_top menu_nomal">
-                        <?php } ?>
-                            <!-- 各<td>の表示内容指定 -->
-                            <td class="date_view">{{$work_time -> date . "(" .$week[$w_num] . ")"}}</td>
-                            <td class="time_view">{{$work_time -> start_time != '' ? substr($work_time -> start_time , 0, -3) : '' }}</td> <!-- start_timeが空じゃなかったら、0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字） -->
-                            <td class="time_view">{{$work_time -> end_time != '' ? substr($work_time -> end_time , 0, -3) : '' }}</td>
-                            <td class="time_view">{{$work_time -> rest_on != '' ? substr($work_time -> rest_on , 0, -3) : '' }}</td>
-                            <td class="time_view">{{$work_time -> rest_back != '' ? substr($work_time -> rest_back , 0, -3) : '' }}</td>
-                            <td class="comment_view">{{$work_time -> comment}}</td>
-                            <td><button class="menu_button" onclick="submit_to_edit('{{ $date }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
-                        </tr>
-                        @endforeach
+                                <!-- 曜日の色分け（ 土曜:水色 , 日曜:ピンク ） -->
+                                <?php if ($w_num == 0) { ?>                                         <!-- ↓↓ cssの「:hover」の役割 -->
+                                    <tr class="menu_top menu_pink" style="background-color:#FFDDFF" onMouseOut="this.style.background='#FFDDFF';" onMouseOver="this.style.background='rgba(250, 162, 235, 0.5)'">
+                                <?php } else if ($w_num == 6) { ?>
+                                    <tr class="menu_top menu_blue" style="background-color:#DDFFFF" onMouseOut="this.style.background='#DDFFFF';" onMouseOver="this.style.background='rgba(63, 166, 235, 0.2)'">
+                                <?php } else { ?>
+                                    <tr class="menu_top menu_nomal">
+                                <?php } ?>
+
+                                <!-- 各<td>の表示内容指定-->
+                                <?php if ( $work_timestamp != $date ) { ?>  <!-- データが空だった時の処理 -->
+                                    <td class="date_view">                  <!-- $work_timestamp：$work_timesのjのデータからdateを１日ずつ値を持ってきて作成されたタイムスタンプ , $date：今月の１～末日のタイムスタンプ -->
+                                        <?php
+                                            echo date('Y-m-d', $date).'(';
+                                            echo $week[ date('w', $date) ];
+                                            echo ')'
+                                        ?>
+                                    </td>
+                                    <td class="time_view"></td>
+                                    <td class="time_view"></td>
+                                    <td class="time_view"></td>
+                                    <td class="time_view"></td>
+                                    <td class="comment_view"></td>
+                                    <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
+                                <?php } else { ?>                           <!-- データが空じゃない時の処理 -->
+                                    <td class="date_view">{{$work_times[$j] -> date . "(" .$week[$w_num] . ")"}}</td>
+                                    <td class="time_view">{{$work_times[$j] -> start_time != '' ? substr($work_times[$j] -> start_time , 0, -3) : '' }}</td> <!-- substr関数：start_timeが空じゃなかったら、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「else」空を表示する -->
+                                    <td class="time_view">{{$work_times[$j] -> end_time != '' ? substr($work_times[$j] -> end_time , 0, -3) : '' }}</td>
+                                    <td class="time_view">{{$work_times[$j] -> rest_on != '' ? substr($work_times[$j] -> rest_on , 0, -3) : '' }}</td>
+                                    <td class="time_view">{{$work_times[$j] -> rest_back != '' ? substr($work_times[$j] -> rest_back , 0, -3) : '' }}</td>
+                                    <td class="comment_view">{{$work_times[$j] -> comment}}</td>
+                                    <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
+                                <?php 
+                                    $j++;    //これをデータがあるだけ繰り返す
+                                } ?>
+                            </tr>
+                        <?php
+                        	} // for文の終わり
+                        ?>
+
                         <!-- EditControllerに必要な上記で足りないデータをhiddenで渡す -->
                         <input type="hidden" id="date" name="date">
                         <input type="hidden" id="work_id" name="work_id" value="{{ $work_user->work_id }}">

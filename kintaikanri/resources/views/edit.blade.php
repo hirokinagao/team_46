@@ -29,7 +29,7 @@
             <div class="edit">
                 <form action="{{ url('update') }}" method="post">
                 @csrf
-                    <input class="display_date" type="text" name="date" id="date" value="{{ $record->date }}" readonly>
+                    <input class="display_date" type="text" name="date" id="date" value="{{ $date }}" readonly>
                     
                     <div class="upclass">
                         <div class="shainn">
@@ -80,34 +80,46 @@
                             document.querySelector('#kinmu').addEventListener('change', e=>{
                                 //取得した値を配列に代入
                                 var times = [
-                                    '{{ $record->start_time }}',
-                                    '{{ $record->end_time }}',
-                                    '{{ $record->rest_on }}',
-                                    '{{ $record->rest_back }}'
+                                    @if ( !empty($record) )   // $recordが空じゃなかったら
+                                        '{{ $record->start_time }}',
+                                        '{{ $record->end_time }}',
+                                        '{{ $record->rest_on }}',
+                                        '{{ $record->rest_back }}'
+                                    @else                     // $recordが空だったら
+                                        '00:00', '00:00' , '00:00' , '00:00'
+                                    @endif
                                 ];
                                 //「e」イベントが発動したら、<select>の配列要素の番号がselectedIndexになる
-                                // 打刻がない場合は'0:0'を入れる
-                                if (times[e.target.selectedIndex] == '') {
+                                // 打刻がない場合は'0:0'を入れる    // $recordが空じゃないけど、指定された勤退に時刻が入ってない場合（これをしないと９８行目でエラーになる）
+                                if (times[e.target.selectedIndex] == '') {      // e.target.selectedIndex：https://techacademy.jp/magazine/33364
                                     times[e.target.selectedIndex] = '0:0';
                                 }
                                 // データを「時」と「分」に分割（「:」で分割 ⇒ 前後で配列になる ）
                                 var time = times[e.target.selectedIndex].split(':');
                                 document.querySelector('#hour').selectedIndex = parseInt(time[0]);  //parseIntは文字列を整数型に直してる ⇒ その数字が配列の数字として<select>のselectedIndexに代入される
-                                document.querySelector('#minites').selectedIndex = parseInt(time[1]); //                                                                             ↑↑ selectedIndex ⇒ これが選択している要素の数字になる
+                                document.querySelector('#minites').selectedIndex = parseInt(time[1]); //                                                                       ↑↑ selectedIndex ⇒ これが選択している要素の数字になる
                             });
                         });
                         
                         //最初に「出勤」を表示させるためのメソッド（ 最初に「出勤」を選択し、start_timeを表示させておく ）
                         function selectAtLoad() {
-                            var time = '{{ $record->start_time }}'.split(':');
-                            document.querySelector('#hour').selectedIndex = parseInt(time[0]);
-                            document.querySelector('#minites').selectedIndex = parseInt(time[1]);
+                            @if ( !empty($record) )
+                                var time = '{{ $record->start_time }}'.split(':');
+                                document.querySelector('#hour').selectedIndex = parseInt(time[0]);
+                                document.querySelector('#minites').selectedIndex = parseInt(time[1]);
+                            @endif
                         }
                         window.onload = selectAtLoad;
                     </script>
 
                     <p class="title_name5">コメント</p>
-                    <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value="{{ $record->comment }}"><br>
+                    <?php 
+                        $comment = '';
+                        if ( !empty($record) ){
+                            $comment = $record->comment;
+                        }
+                    ?>
+                    <input class="comment_box" type="text" id="comment" name="comment" maxlength="30" placeholder="コメント" value="{{ $comment }}"><br>
                     <button class="save_button" type="submit" name="submit">保存</button>
                 </form>
             </div>
