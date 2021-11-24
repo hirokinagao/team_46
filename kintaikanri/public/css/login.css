@@ -1,0 +1,74 @@
+/* 柳田専用 */
+
+html , body {
+    height: 100%;
+}
+
+.login-wrapper {
+    background-image: url(/img/blue.jpg);
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    font-family:'Lucida Console';
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    /* margin: 0 auto; */
+    width: 500px;
+    height: auto;
+    background-color:rgba(255, 255, 255, 0.4);
+    padding:20px 50px 80px 50px;
+    border-radius: 20px;
+}
+
+.container img {
+    width: 35%;
+    margin-bottom: 20px;
+}
+
+.container .message {
+    color: red;
+    font-size: 13px;
+}
+
+.container input {
+    margin-bottom: 30px;
+    padding: 0 20px;
+    width: 400px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    border-color: rgba(255, 255, 255, 0.4);
+    color: black;
+}
+
+.container input:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-color: #1af;
+}
+
+.container input:focus {
+    outline: 0;
+}
+
+.container .login {
+    color: white;
+    height: 50px;
+    background-color: rgba(0, 183, 255, 0.822);
+    border: 0;
+    width: 200px;
+    border-radius: 12px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+.container .login:hover {
+    background-color: rgba(0, 238, 255, 0.76);
+}
+
+.container .login:focus {
+    box-shadow: none;
+}
+

@@ -1,0 +1,88 @@
+/* 柳田専用 */
+
+/*
+全体
+****/
+html , body {
+    height: 100%;
+    font-size: 100%;
+}
+
+.main_wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    width: 100%;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    margin-left: 120px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*
+サイドメニュー
+**************/
+.side {
+    width: 120px;
+    background-color: #99FFFF;
+    height: 100vh;
+    /* position: sticky; */
+    text-align: center;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+.side img {
+    width: 100%;
+    position: absolute;
+    left: -1px;
+    top: 10px;
+}
+
+.side .icon {
+    padding: 30px 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.side .icon:hover {
+    color: black;
+    background-color: rgba(0, 0, 255, 0.2);
+}
+
+.side .tukibetu {
+    margin-top: 150px;
+}
+
+.side .logout {
+    position: absolute;
+    left: 16px;
+    bottom: 40px;
+    font-size: 15px;
+    padding: 12px 14px;
+    background-color: #3399FF;
+    border-color: #3399FF;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.side .logout:hover {
+    color: white;
+    background-color: #00CCFF;
+    border-color: #00CCFF;
+}
+
+.side .logout:focus {
+    box-shadow: none;
+}
+

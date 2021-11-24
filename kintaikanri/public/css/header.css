@@ -1,0 +1,25 @@
+/* 柳田専用 */
+
+/*
+ヘッダー
+********/
+.header {
+    width: 100%;
+    background-color: #CCFFFF;
+    height: 50px;
+    padding: 13px 20px;
+}
+
+.header h2 , .header h3 {
+    font-size: 18px;
+}
+
+.header h2 {
+    float: left;
+}
+
+.header h3 {
+    float: right;
+    padding-right: 20px;
+}
+

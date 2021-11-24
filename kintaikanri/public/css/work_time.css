@@ -1,0 +1,129 @@
+/* 宮内専用 */
+
+.work_time {
+    text-align: center;
+}
+
+.time_view {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+.time_circle {
+    margin-top: 5px;
+}
+
+.time_circle input , .time_circle label{
+    line-height:145px;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.time_circle input{
+    display: none;
+}
+
+.upclass , .downclass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.syukkin{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    text-align:center;
+    background:#3399FF;
+    color: black;
+    margin: 0 30px;
+}
+
+.syukkin:hover , .syukkin:checked + label {
+    color: white;
+    background-color: #0000FF;
+}
+
+.taikin{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    text-align:center;
+    background:#FF99CC;
+    color: black;
+    margin: 0 30px;
+}
+
+.taikin:hover , .taikin:checked + label  {
+    color: white;
+    background-color: #FF0033;
+}
+
+.kyuukeiiri{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    text-align:center;
+    background:#FFFF99;
+    color: black;
+    margin: 0 30px;
+}
+
+.kyuukeiiri:hover , .kyuukeiiri:checked + label {
+    color: white;
+    background-color: #ffee00;
+}
+
+.kyuukeimodori{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    text-align:center;
+    background:#93FFAB;
+    color: black;
+    margin: 0 30px;
+}
+
+.kyuukeimodori:hover , .kyuukeimodori:checked + label {
+    color: white;
+    background-color: #0bbd0b;
+}
+
+.comment_box input {
+    width:700px;
+    height: 40px;
+    border:1px solid rgb(126, 124, 124);
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+.comment_box input::-webkit-input-placeholder {
+    position:absolute;
+    top:7px;
+    left: 15px;
+}
+
+.comment_box input:focus {
+    outline: none;
+}
+
+.add_button {
+    background-color: #04dff3;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    padding: 10px 100px;
+    margin-top: 25px;
+}
+
+.add_button:hover {
+    background-color: rgba(0, 238, 255, 0.76);
+}
+
+.add_button:focus {
+    outline: none;
+}

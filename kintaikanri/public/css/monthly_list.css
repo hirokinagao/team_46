@@ -1,0 +1,122 @@
+/* 長尾専用 */
+
+html , body {
+    height: 100%;
+}
+
+.main{
+    position: relative;
+}
+.area_item {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.area {
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.area h1 {
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.display_view {
+    width: 250px;
+    background-color: rgba(250, 250, 85, 0.5);
+    position: relative;
+    top:50px;
+    left: 1100px;
+    /* left: 800px; */
+}
+
+.display_in {
+    width: 100%;
+    text-align: center;
+    color: rgb(41, 41, 212);
+    font-weight: bold;
+}
+
+.display_view span {
+    margin-right: 10px;
+}
+
+.memu{
+    color: #333fe2;
+    line-height: 55px;
+}
+
+.memu th{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.memu_top{
+font-size: 14px;
+line-height: 22px;
+}
+
+.menu_nomal:hover {
+    background-color: rgba(185, 185, 185, 0.1);
+}
+
+th {
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.date_view {
+    width: 20%;
+}
+
+.time_view {
+    width: 10%;
+}
+
+.comment_view{
+    text-align: left;
+    width: 28%;
+    padding-right: 0;
+}
+
+table{
+    width: 100%;
+}
+
+.table{
+    width: 1300px;
+    /* width: 1050px; */
+    position: relative;
+    left: 50px;
+    top:20px;
+    margin-bottom: 50px;
+}
+
+.menu_button {
+    background-color: #3b85f5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 3px 10px;
+}
+
+.menu_button:hover {
+    background-color: rgba(0, 174, 255, 0.76);
+}
+
+.menu_button:focus {
+    outline: none;
+}
+

@@ -1,5 +1,7 @@
 <?php
 
+// 今回は使用しないファイル
+
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
