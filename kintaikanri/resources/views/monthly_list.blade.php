@@ -1,4 +1,6 @@
+
 <!-- 長尾専用 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -101,17 +103,21 @@
                                     <td class="comment_view"></td>
                                     <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                                 <?php } else { ?>                           <!-- データが空じゃない時の処理 -->
+                                    {{-- 日付 --}}
                                     <td class="date_view">{{$work_times[$j] -> date . "(" .$week[$w_num] . ")"}}</td>
+                                    {{-- 出勤時間に関してエラーがあった場合と無かった場合の表示分け --}}
                                     @if ($work_times[$j] -> start_time == '' && $work_times[$j] -> end_time != '')
                                         <td class="time_view" style="background-color: #FFFF33;"><div class="tooltip1">ｘ<div class="description1">開始時間を入力してください</div></div></td> <!-- substr関数：start_timeが空じゃなかったら、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「else」空を表示する -->
                                     @else
-                                        <td class="time_view">{{$work_times[$j] -> start_time != '' ? substr($work_times[$j] -> start_time , 0, -3) : '' }}</td> <!-- substr関数：start_timeが空じゃなかったら、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「else」空を表示する -->
+                                        <td class="time_view">{{$work_times[$j] -> start_time != '' ? substr($work_times[$j] -> start_time , 0, -3) : '' }}</td> <!-- substr関数：start_timeが空じゃなかったら「?」⇒「ifの略記号」、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「elseの略記号」空を表示する -->
                                     @endif
+                                    {{-- 退勤時間に関してエラーがあった場合と無かった場合の表示分け --}}
                                     @if ($work_times[$j] -> end_time == '' && $work_times[$j] -> start_time != '')
                                         <td class="time_view" style="background-color: #FFFF33;'"><div class="tooltip1">ｘ<div class="description1">終了時間を入力してください</div></div></td>
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> end_time != '' ? substr($work_times[$j] -> end_time , 0, -3) : '' }}</td>
                                     @endif
+                                    {{-- 休憩時間 ( タイムスタンプ取得 → 時間の差分を出す → エラーがあった場合と無かった場合の表示分け ) --}}
                                     <?php
                                         $rest_err = false;
                                         $rest_err_msg = '';
@@ -119,22 +125,22 @@
                                             $s_hour = substr($work_times[$j] -> start_time, 0, 2);
                                             $s_min = substr($work_times[$j] -> start_time, 3, 2);
                                             $s_sec = substr($work_times[$j] -> start_time, 6, 2);
-                                            $s_time = mktime($s_hour, $s_min, $s_sec, $month, $i, $year);  //秒数がでる
+                                            $s_time = mktime($s_hour, $s_min, $s_sec, $month, $i, $year);  //出勤時間の秒数をタイムスタンプで取得
                                             $e_hour = substr($work_times[$j] -> end_time, 0, 2);
                                             $e_min = substr($work_times[$j] -> end_time, 3, 2);
                                             $e_sec = substr($work_times[$j] -> end_time, 6, 2);
-                                            $e_time = mktime($e_hour, $e_min, $e_sec, $month, $i, $year);
-                                            // 8時間以上で１時間以上の休憩
-                                            if ( ($e_time - $s_time)/3600 >= 8) {   //差分をとる  /3600で時間にする
-                                                if ($work_times[$j] -> rest_on != '' && $work_times[$j] -> rest_back != '') {  //休憩時間の入りと戻りの差分
+                                            $e_time = mktime($e_hour, $e_min, $e_sec, $month, $i, $year);  //退勤時間の秒数をタイムスタンプで取得
+                                            // 勤務８時間以上で１時間以上の休憩を前提とすると・・・
+                                            if ( ($e_time - $s_time)/3600 >= 8) {   //差分をとる ( /3600で時間にする )
+                                                if ($work_times[$j] -> rest_on != '' && $work_times[$j] -> rest_back != '') {    //休憩時間の入りと戻りの差分
                                                     $rs_hour = substr($work_times[$j] -> rest_on, 0, 2);
                                                     $rs_min = substr($work_times[$j] -> rest_on, 3, 2);
-                                                    $rs_sec = substr($work_times[$j] -> rest_on, 6, 2);
-                                                    $rs_time = mktime($rs_hour, $rs_min, 0, $month, $i, $year);
+                                                    // $rs_sec = substr($work_times[$j] -> rest_on, 6, 2);  //今回は$rs_timeで $rs_sec = 0 としている為、この行はなくてもOK
+                                                    $rs_time = mktime($rs_hour, $rs_min, 0, $month, $i, $year);  //休憩入りの秒数をタイムスタンプで取得
                                                     $re_hour = substr($work_times[$j] -> rest_back, 0, 2);
                                                     $re_min = substr($work_times[$j] -> rest_back, 3, 2);
-                                                    $re_sec = substr($work_times[$j] -> rest_back, 6, 2);
-                                                    $re_time = mktime($re_hour, $re_min, 0, $month, $i, $year);
+                                                    // $re_sec = substr($work_times[$j] -> rest_back, 6, 2);  //今回は$re_timeで $re_sec = 0 としている為、この行はなくてもOK
+                                                    $re_time = mktime($re_hour, $re_min, 0, $month, $i, $year);  //休憩戻りの秒数をタイムスタンプで取得
                                                     if ( ($re_time - $rs_time)/3600 < 1) {
                                                         $rest_err = true;
                                                         $rest_err_msg = '休憩時間が１時間未満です';
@@ -146,7 +152,7 @@
                                             }
                                         }
                                     ?>
-                                    @if ($rest_err)
+                                    @if ($rest_err)     <!-- 休憩時間に関してエラーがあった場合と無かった場合の表示分け -->
                                         <td class="time_view" style="background-color:#FFFF33;'"><div class="tooltip1">{{$work_times[$j] -> rest_on != '' ? substr($work_times[$j] -> rest_on , 0, -3) : 'ｘ' }}<div class="description1">{{ $rest_err_msg }}</div></div></td>
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> rest_on != '' ? substr($work_times[$j] -> rest_on , 0, -3) : '' }}</td>
@@ -156,8 +162,10 @@
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> rest_back != '' ? substr($work_times[$j] -> rest_back , 0, -3) : '' }}</td>
                                     @endif
-                                        <td class="comment_view">{{$work_times[$j] -> comment}}</td>
-                                        <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
+                                    {{-- コメント --}}
+                                    <td class="comment_view">{{$work_times[$j] -> comment}}</td>
+                                    {{-- 編集ボタン --}}
+                                    <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                                 <?php 
                                     $j++;    //これをデータがあるだけ繰り返す
                                 } ?>
