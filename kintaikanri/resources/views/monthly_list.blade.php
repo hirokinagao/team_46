@@ -103,21 +103,21 @@
                                     <td class="comment_view"></td>
                                     <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                                 <?php } else { ?>                           <!-- データが空じゃない時の処理 -->
-                                    {{-- 日付 --}}
+                                    <!-- 日付 -->
                                     <td class="date_view">{{$work_times[$j] -> date . "(" .$week[$w_num] . ")"}}</td>
-                                    {{-- 出勤時間に関してエラーがあった場合と無かった場合の表示分け --}}
+                                    <!-- 出勤時間に関してエラーがあった場合と無かった場合の表示分け -->
                                     @if ($work_times[$j] -> start_time == '' && $work_times[$j] -> end_time != '')
                                         <td class="time_view" style="background-color: #FFFF33;"><div class="tooltip1">ｘ<div class="description1">開始時間を入力してください</div></div></td> <!-- substr関数：start_timeが空じゃなかったら、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「else」空を表示する -->
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> start_time != '' ? substr($work_times[$j] -> start_time , 0, -3) : '' }}</td> <!-- substr関数：start_timeが空じゃなかったら「?」⇒「ifの略記号」、秒を省いて表示（ 0 から（先頭から）、後ろから３文字目を切る（つまり先頭から4文字目までの文字 ））、「：」⇒「elseの略記号」空を表示する -->
                                     @endif
-                                    {{-- 退勤時間に関してエラーがあった場合と無かった場合の表示分け --}}
+                                    <!-- 退勤時間に関してエラーがあった場合と無かった場合の表示分け -->
                                     @if ($work_times[$j] -> end_time == '' && $work_times[$j] -> start_time != '')
                                         <td class="time_view" style="background-color: #FFFF33;'"><div class="tooltip1">ｘ<div class="description1">終了時間を入力してください</div></div></td>
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> end_time != '' ? substr($work_times[$j] -> end_time , 0, -3) : '' }}</td>
                                     @endif
-                                    {{-- 休憩時間 ( タイムスタンプ取得 → 時間の差分を出す → エラーがあった場合と無かった場合の表示分け ) --}}
+                                    <!-- 休憩時間 : タイムスタンプ取得 → 時間の差分を出す → エラーがあった場合と無かった場合の表示分け -->
                                     <?php
                                         $rest_err = false;
                                         $rest_err_msg = '';
@@ -162,9 +162,9 @@
                                     @else
                                         <td class="time_view">{{$work_times[$j] -> rest_back != '' ? substr($work_times[$j] -> rest_back , 0, -3) : '' }}</td>
                                     @endif
-                                    {{-- コメント --}}
+                                    <!-- コメント -->
                                     <td class="comment_view">{{$work_times[$j] -> comment}}</td>
-                                    {{-- 編集ボタン --}}
+                                    <!-- 編集ボタン -->
                                     <td><button class="menu_button" onclick="submit_to_edit('{{ date('Y-m-d', $date) }}')">編集</button></td><!-- ボタンが押されたらJavaScriptのメソッドを呼び出す -->
                                 <?php 
                                     $j++;    //これをデータがあるだけ繰り返す
