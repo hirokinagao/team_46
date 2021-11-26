@@ -130,9 +130,9 @@
                                             $e_min = substr($work_times[$j] -> end_time, 3, 2);
                                             $e_sec = substr($work_times[$j] -> end_time, 6, 2);
                                             $e_time = mktime($e_hour, $e_min, $e_sec, $month, $i, $year);  //退勤時間の秒数をタイムスタンプで取得
-                                            // 勤務８時間以上で１時間以上の休憩を前提とすると・・・
-                                            if ( ($e_time - $s_time)/3600 >= 8) {   //差分をとる ( /3600で時間にする )
-                                                if ($work_times[$j] -> rest_on != '' && $work_times[$j] -> rest_back != '') {    //休憩時間の入りと戻りの差分
+                                            // 勤務８時間以上で１時間以上の休憩を前提とすると・・・↓↓
+                                            if ( ($e_time - $s_time)/3600 >= 8) {   //出勤時間と退勤時間の差分が8時間以上だったら ( /3600で時間にする )
+                                                if ($work_times[$j] -> rest_on != '' && $work_times[$j] -> rest_back != '') {
                                                     $rs_hour = substr($work_times[$j] -> rest_on, 0, 2);
                                                     $rs_min = substr($work_times[$j] -> rest_on, 3, 2);
                                                     // $rs_sec = substr($work_times[$j] -> rest_on, 6, 2);  //今回は$rs_timeで $rs_sec = 0 としている為、この行はなくてもOK
@@ -141,11 +141,11 @@
                                                     $re_min = substr($work_times[$j] -> rest_back, 3, 2);
                                                     // $re_sec = substr($work_times[$j] -> rest_back, 6, 2);  //今回は$re_timeで $re_sec = 0 としている為、この行はなくてもOK
                                                     $re_time = mktime($re_hour, $re_min, 0, $month, $i, $year);  //休憩戻りの秒数をタイムスタンプで取得
-                                                    if ( ($re_time - $rs_time)/3600 < 1) {
+                                                    if ( ($re_time - $rs_time)/3600 < 1) {   //休憩戻りと休憩入りの差分が1時間未満だったら ( /3600で時間にする )
                                                         $rest_err = true;
                                                         $rest_err_msg = '休憩時間が１時間未満です';
                                                     }
-                                                } else {
+                                                } else {   //出勤時間と退勤時間の差分が8時間以上じゃなかったら 
                                                     $rest_err = true;
                                                     $rest_err_msg = '休憩時間が未入力です';
                                                 }
