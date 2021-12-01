@@ -47,6 +47,27 @@ class Work_timeController extends Controller
      */
     public function insert(Request $request)
     {
+        // 勤務状況のラジオボタンが選択されていなかった場合はエラー表示
+        // ↓↓
+        //$requestの情報を代入
+        $situation = $request->situation;
+        $name = $request->session()->get('name');
+        $role = $request->session()->get('role');
+        $work_id = $request->session()->get('work_id');
+        $error_message = null;
+        if (empty($situation)){
+            $error_message = '勤務状況が選択されていません。';
+            $view = view('work_time', [
+                'message' => $error_message,
+                'user_name' => $name,   //ここから下3つはheader用に渡すデータ(各画面共通)
+                'user_role' => $role,
+                'work_id' => $work_id,
+            ]);
+            return $view;
+        }
+
+        // エラーがない場合の通常の動作
+        // ↓↓
         //$requestの情報を代入
         $work_id = $request->session()->get('work_id');
         $situation = $request->situation;

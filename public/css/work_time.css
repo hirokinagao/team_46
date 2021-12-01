@@ -9,6 +9,14 @@
     font-size: 40px;
 }
 
+.message {
+    width: 100%;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.726);
+    font-size: 20px;
+    margin: 0;
+}
+
 .time_circle {
     margin-top: 5px;
 }
