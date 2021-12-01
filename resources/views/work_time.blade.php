@@ -79,6 +79,11 @@
                 <input type="hidden" name="date_now" id="date_now">  <!-- ← 年月も一緒にformで飛ばす用（上記でsprigタグで書いた送信用メソッドに紐づく） -->
                 <input type="hidden" name="time_now" id="time_now">  <!-- ← 時刻も一緒にformで飛ばす用（上記でsprigタグで書いた送信用メソッドに紐づく） -->
                 
+                <!-- エラー表示用 -->
+                @if(isset($message))
+                    <p class="message">{{$message}}</p>
+                @endif
+
                 <div class="time_circle">
                     <div class="upclass">
                         <input id="radio1" class="syukkin" type="radio" name="situation" value="出勤">
